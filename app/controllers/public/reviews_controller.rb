@@ -10,8 +10,8 @@ class Public::ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    @park = @review.park # レビューに関連するパークを取得
     @review.destroy
+    @park = @review.park # レビューに関連するパークを取得
     redirect_to park_path(@park)
   end
 

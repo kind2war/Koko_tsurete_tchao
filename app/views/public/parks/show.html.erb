@@ -1,8 +1,8 @@
 <h1>parks#show</h1>
-<% if @review_comment.errors.any? %>
+<% if @review.errors.any? %>
   <div class = "alert">
     <ul>
-      <% @review_comment.errors.full_messages.each do |message| %>
+      <% @review.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>
@@ -33,19 +33,29 @@
 </table>
 
 <!--投稿されたレビューを表示させる-->
-<% @reviews.each do |review| %>
-  <div class="review_title">
-    <b>title:</b>
-    <%= review.title %><br />
-  </div>
-  <div class="review_detail">
-    <b>review_detail:</b>
-    <%= review.review_detail %><br />
-  </div>
-  <% if @member == current_member %>
-    <%= link_to 'Destroy', review, method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %>
-  <% end %>
-<%end%>
+<table>
+
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Review Detail</th>
+      <th>Auther</th>
+      <th></th>
+    </tr>
+  </thead>
+    <% @reviews.each do |review| %>
+  <tbody>
+    <tr>
+      <td><%= review.title %></td>
+      <td><%= review.review_detail %></td>
+      <td><%= review.member.account_name %></td>
+      <% if @member == current_member %>
+      <td><%= link_to 'Destroy', park_review_path(review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %></td>
+      <% end %>
+    </tr>
+  </tbody>
+  <%end%>
+</table>
 
 <!--「まだレビューは投稿されていません」-->
 <!--レビュー投稿フォーム-->

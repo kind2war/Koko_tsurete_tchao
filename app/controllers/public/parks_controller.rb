@@ -5,7 +5,7 @@ class Public::ParksController < ApplicationController
     @review_comment = ReviewComment.new
     @review = Review.new
     @reviews = @park.reviews.all
-    @member = Member.all
+    @member = current_member
   end
 
   def index
