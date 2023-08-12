@@ -5,8 +5,8 @@ class AddColumnToMembers < ActiveRecord::Migration[6.1]
     add_column :members, :sex,          :integer, null: false, default: 0
     add_column :members, :spouse,       :integer, null: false, default: 0
     add_column :members, :children,     :integer, null: false, default: 0
-    add_column :members, :prefectures,  :string,  null: false, default: ""
-    add_column :members, :city,         :string,  null: false, default: ""
+    add_column :members, :prefecture_id,:integer
+    add_column :members, :city_id,      :integer
     add_column :members, :is_deleted,   :boolean, null: false, default: false
   end
 end

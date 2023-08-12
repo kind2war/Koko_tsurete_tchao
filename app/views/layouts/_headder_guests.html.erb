@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <ul class="row">
+    <div class="nav-item col-sm-auto">
+      <%= link_to "About", about_path, class: 'btn btn-outline-secondary w-auto' %>
+    </div>
+    <div class="nav-item col-sm-auto">
+      <%= link_to "公園一覧", parks_path, class: 'btn btn-outline-secondary w-auto' %>
+    </div>
+    <!--公園検索-->
+    <div class="nav-item col-sm-auto">
+      <%= link_to "新規登録", new_member_registration_path, class: 'btn btn-outline-secondary w-auto' %>
+    </div>
+    <div class="nav-item col-sm-auto">
+      <%= link_to "ログイン", new_member_session_path, class: 'btn btn-outline-secondary w-auto' %>
+    </div>
+  </ul>
+<!--
+  <ul class="row justify-content-end">
+    <form class="d-flex" role="search">
+      <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </ul>
+-->
+</div>
+

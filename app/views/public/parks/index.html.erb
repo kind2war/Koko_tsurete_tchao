@@ -1,1 +1,30 @@
 <h1>parks#index</h1>
+<%= form_tag import_parks_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>NO.</th>
+      <th>名称</th>
+      <th>所在地</th>
+      <th>種別</th>
+      <th>緯度</th>
+      <th>経度</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @parks.each do |park| %>
+      <tr>
+        <td><%= park.id %></td>
+        <td><%= park.park_name %></td>
+        <td><%= park.address %></td>
+        <td><%= park.park_type %></td>
+        <td><%= park.latitude %></td>
+        <td><%= park.longitude %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

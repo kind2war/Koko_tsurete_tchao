@@ -1,4 +1,7 @@
 class Public::MembersController < ApplicationController
-  def show
+  def new
+    @member = Member.new
   end
+
 end
+

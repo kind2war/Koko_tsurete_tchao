@@ -1,0 +1,20 @@
+<% if member_signed_in? %>
+<%= "ようこそ、#{ current_member.account_name } さん！" %>
+<% end %>
+
+<!--作業用-->
+<% if member_signed_in? %>
+  <%= render 'layouts/headder_members' %>
+<% else %>
+  <%= render 'layouts/headder_guests' %>
+<% end %>
+
+
+<!--　管理者用あり　-->
+<%# if admin_signed_in? %>
+  <%#= render 'layouts/headder_admin' %>
+<%# elsif customer_signed_in? %>
+  <%#= render 'layouts/headder_customer' %>
+<%# else %>
+  <%#= render 'layouts/headder_guest' %>
+<%# end %>

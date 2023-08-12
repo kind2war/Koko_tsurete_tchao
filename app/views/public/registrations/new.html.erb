@@ -1,28 +1,65 @@
-<h2>Sign up</h2>
+<h2>ユーザー新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :メールアドレス %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :パスワード %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :入力確認 %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div class="sex_field">
+    <%= f.label :性別 %><br />
+    <%= f.label :男性  %>
+    <%= f.radio_button :sex, :man %>
+    <%= f.label :女性  %>
+    <%= f.radio_button :sex, :woman %>
+  </div>
+
+  <div class="date_select">
+    <%= f.label :生年月日 %><br/>
+    <%= f.date_select :birth_date, use_month_numbers: true,
+        start_year: 1930,
+        end_year: (Time.now.year - 16),
+        default: Date.new(1991, 1, 1) %>
+  </div>
+<!--
+  <div class="spouse_field">
+    <%#= f.label :配偶者 %><br />
+    <%#= f.label :いる  %>
+    <%#= f.radio_button :spouse, :with_spouse %>
+    <%#= f.label :いない  %>
+    <%#= f.radio_button :spouse, :not_with_spouse %>
+  </div>
+
+  <div class="children_field">
+    <%#= f.label :お子さま %><br />
+    <%#= f.label :いる  %>
+    <%#= f.radio_button :children, :with_children %>
+    <%#= f.label :いない  %>
+    <%#= f.radio_button :children, :not_with_children %>
+  </div>
+-->
+  <div class="account_name">
+    <%= f.label :アカウント名 %>
+    <%= f.text_field :account_name %>
+  </div>
+
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
 <% end %>
 
