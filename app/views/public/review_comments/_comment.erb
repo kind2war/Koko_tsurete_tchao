@@ -1,0 +1,9 @@
+<% park.review_comments.each do |comment| %>
+  <%= comment.comment %>
+    <% if comment.member == current_member %>
+    <%= link_to 'Destroy', park_comment_path(comment.park_id, comment),
+                           method: :delete, remote:true, data: {"turbolinks" => false},
+                           class: "btn btn-sm btn-danger"%>
+    <%end%>
+  <%= link_to comment.member.account_name, member_path(comment.member.id) %>
+<% end %>

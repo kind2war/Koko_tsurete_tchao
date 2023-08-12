@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_10_120442) do
+ActiveRecord::Schema.define(version: 2023_08_12_055124) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -99,10 +99,21 @@ ActiveRecord::Schema.define(version: 2023_08_10_120442) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "review_comments", force: :cascade do |t|
+    t.text "comment", null: false
+    t.integer "member_id"
+    t.integer "park_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_review_comments_on_member_id"
+    t.index ["park_id"], name: "index_review_comments_on_park_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "member_id"
     t.integer "park_id"
-    t.text "review_detail", default: ""
+    t.string "title", default: "", null: false
+    t.text "review_detail", default: "", null: false
     t.boolean "draft_flag", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -116,6 +127,8 @@ ActiveRecord::Schema.define(version: 2023_08_10_120442) do
   add_foreign_key "features", "parks"
   add_foreign_key "parks", "features"
   add_foreign_key "parks", "reviews"
+  add_foreign_key "review_comments", "members"
+  add_foreign_key "review_comments", "parks"
   add_foreign_key "reviews", "members"
   add_foreign_key "reviews", "parks"
 end

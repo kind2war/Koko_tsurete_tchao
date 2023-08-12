@@ -14,10 +14,12 @@ Rails.application.routes.draw do
   scope module: :public do
     get '/about' => 'homes#about', as: "about"
     resources :parks, only: [:show, :index] do
+      #resources :review_comments, only: [:create, :destroy]
+      resources :reviews, only: [:show, :index, :create, :destroy]
       collection { post :import }
     end
     get '/mypage', to: 'members#show', as: 'mypage'
-      resources :members
+    resources :members
 
   end
 end

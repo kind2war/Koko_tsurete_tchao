@@ -6,6 +6,7 @@ class Member < ApplicationRecord
   has_many :change_requests, dependent: :destroy
   has_many :children,  dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :review_comments, dependent: :destroy
   has_many :prefectures
   has_many :cities
   validates :account_name, presence: true, length: { maximum: 20 }

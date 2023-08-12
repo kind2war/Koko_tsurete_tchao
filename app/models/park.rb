@@ -2,6 +2,7 @@ class Park < ApplicationRecord
   has_many :change_requests, dependent: :destroy
   has_many :features, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :review_comments, dependent: :destroy
 
   def self.import(file)
     CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|

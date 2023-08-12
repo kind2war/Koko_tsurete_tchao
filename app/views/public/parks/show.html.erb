@@ -1,5 +1,13 @@
 <h1>parks#show</h1>
-
+<% if @review_comment.errors.any? %>
+  <div class = "alert">
+    <ul>
+      <% @review_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -25,5 +33,33 @@
 </table>
 
 <!--投稿されたレビューを表示させる-->
+<% @reviews.each do |review| %>
+  <div class="review_title">
+    <b>title:</b>
+    <%= review.title %><br />
+  </div>
+  <div class="review_detail">
+    <b>review_detail:</b>
+    <%= review.review_detail %><br />
+  </div>
+  <% if @member == current_member %>
+    <%= link_to 'Destroy', review, method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %>
+  <% end %>
+<%end%>
+
 <!--「まだレビューは投稿されていません」-->
 <!--レビュー投稿フォーム-->
+<%= render "public/reviews/form.html.erb", {park: @park, review: @review } %>
+
+
+
+
+
+<!--
+<div id="comment">
+  <%#= render 'public/review_comments/comment', {park: @park} %>
+</div>
+<div id="comment_form">
+  <%#= render 'public/review_comments/comment_form', {park: @park, review_comment: @review_comment} %>
+</div>
+-->

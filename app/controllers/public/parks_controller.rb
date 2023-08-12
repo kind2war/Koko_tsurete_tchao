@@ -2,6 +2,10 @@ class Public::ParksController < ApplicationController
 
   def show
     @park = Park.find(params[:id])
+    @review_comment = ReviewComment.new
+    @review = Review.new
+    @reviews = @park.reviews.all
+    @member = Member.all
   end
 
   def index
