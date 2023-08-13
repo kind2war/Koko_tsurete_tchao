@@ -1,4 +1,5 @@
 class Public::ReviewsController < ApplicationController
+before_action :authenticate_user!
 
   def create
     @park = Park.find(params[:park_id])
