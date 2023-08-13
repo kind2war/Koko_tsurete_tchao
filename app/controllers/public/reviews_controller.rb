@@ -9,10 +9,9 @@ class Public::ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = Review.find(params[:id])
-    @review.destroy
-    @park = @review.park # レビューに関連するパークを取得
-    redirect_to park_path(@park)
+    review = Review.find(params[:id])
+    review.destroy
+    redirect_back(fallback_location: park_path)
   end
 
  private

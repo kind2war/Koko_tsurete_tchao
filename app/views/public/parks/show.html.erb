@@ -50,7 +50,7 @@
       <td><%= review.review_detail %></td>
       <td><%= review.member.account_name %></td>
       <% if @member == current_member %>
-      <td><%= link_to 'Destroy', park_review_path(review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %></td>
+      <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %></td>
       <% end %>
     </tr>
   </tbody>

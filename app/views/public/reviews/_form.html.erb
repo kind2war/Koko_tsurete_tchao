@@ -1,11 +1,15 @@
-<%= form_with model:[park, review], local: true do |f| %>
-  <div class="form-group">
-  <%= f.label :title %>
-  <%= f.text_field :title,  class: 'form-control review_title' %>
-  </div>
-  <div class ="form-group">
-  <%= f.label :review_detail %>
-  <%= f.text_area :review_detail,  class: 'form-control review_detail' %>
-  </div>
-  <%= f.submit %>
+<% if member_signed_in? %>
+  <%= form_with model:[park, review], local: true do |f| %>
+    <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title,  class: 'form-control review_title' %>
+    </div>
+    <div class ="form-group">
+    <%= f.label :review_detail %>
+    <%= f.text_area :review_detail,  class: 'form-control review_detail' %>
+    </div>
+    <%= f.submit %>
+  <%end%>
+<%else%>
+  <div>レビューを投稿する場合は、ログインをしてください。</div>
 <%end%>
