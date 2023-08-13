@@ -11,15 +11,18 @@ Rails.application.routes.draw do
   }
 
   scope module: :admin do
-    root to: "homes#top", as: "/admin"
+    root to: "homes#top", as: "admin"
   end
 
   scope module: :public do
-    root to: "homes#top", as: "/"
+    root to: "homes#top", as: "root"
     get '/about' => 'homes#about', as: "about"
     resources :parks, only: [:show, :index] do
       resources :reviews, only: [:create]
       collection { post :import }
+      collection do
+        get 'search'
+      end
       #resources :review_comments, only: [:create, :destroy]
     end
     resources :reviews, only: [:show, :edit, :update, :destroy]

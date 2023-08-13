@@ -1,4 +1,6 @@
 class Public::ParksController < ApplicationController
+  before_action :set_q, only: [:index, :search]
+
 
   def show
     @park = Park.find(params[:id])
@@ -9,7 +11,11 @@ class Public::ParksController < ApplicationController
   end
 
   def index
-    @parks = Park.all
+    @parks = @q.result
+  end
+
+  def search
+    @results = @q.result
   end
 
   #csvインポートフォーム用
@@ -18,4 +24,8 @@ class Public::ParksController < ApplicationController
     redirect_to parks_url
   end
 
+private
+  def set_q
+    @q = Park.ransack(params[:q])
+  end
 end

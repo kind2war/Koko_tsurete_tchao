@@ -21,5 +21,8 @@ class Park < ApplicationRecord
     ["id", "park_name", "address","park_type","latitude","longitude"]
   end
 
+ def self.ransackable_attributes(auth_object = nil)
+    ["address", "feature_id", "id", "park_name", "park_type"]
+ end
 
 end

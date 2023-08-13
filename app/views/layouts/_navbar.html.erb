@@ -1,3 +1,7 @@
+<!-- logo部分 -->
+<a class="navbar-brand" href="/">LOGO</a>
+
+<!--ログイン中のアカウント名の表示-->
 <% if member_signed_in? %>
 <%= "ようこそ、#{ current_member.account_name } さん！" %>
 <% end %>
@@ -8,7 +12,6 @@
 <% else %>
   <%= render 'layouts/headder_guests' %>
 <% end %>
-
 
 <!--　管理者用あり　-->
 <%# if admin_signed_in? %>

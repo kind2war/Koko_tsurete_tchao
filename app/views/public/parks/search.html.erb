@@ -1,15 +1,4 @@
-<h2>公園一覧</h2
-<h4>検索</h4>
-  <%= search_form_for @q, url: search_parks_path do |f| %>
-    <%= f.label :park_name_cont, '名称'%>
-    <%= f.search_field :park_name_cont %>
-  <%= f.submit '検索'%>
-  <%end%>
-  <%= search_form_for @q, url: search_parks_path do |f| %>
-    <%= f.label :address_cont, '所在地'%>
-    <%= f.search_field :address_cont %>
-    <%= f.submit '検索'%>
-  <%end%>
+<h1>検索結果</h1>
 <table>
   <thead>
     <tr>
@@ -23,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @parks.each do |park| %>
+    <% @results.each do |park| %>
       <tr>
         <td><%= park.id %></td>
         <td><%= link_to park.park_name, park %></td>
