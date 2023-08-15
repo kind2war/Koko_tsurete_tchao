@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top", as: "root"
     get '/about' => 'homes#about', as: "about"
+    resources :maps, only: [:index]
+      get '/map_request', to: 'maps#map', as: 'map_request'
     resources :parks, only: [:show, :index] do
       resources :reviews, only: [:create]
       collection { post :import }
