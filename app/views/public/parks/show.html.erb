@@ -1,4 +1,4 @@
-<h1>parks#show</h1>
+<h1>公園詳細</h1>
 <% if @review.errors.any? %>
   <div class = "alert">
     <ul>
@@ -9,23 +9,32 @@
   </div>
 <% end %>
 <div id='map'></div>
-<script>
-  function initMap(){
-    var test = {lat: <%= @park.latitude %>, lag: <%= @park.longitude %> };
-    var map = new google.maps.Map(document.getElementById('map'),{
-              zoom = 15,
-              center: test
-    });
-    var marker = new google.maps.Marker({
-              position: test;
-              map: map;
-    });
-    marker.addListener('click',function(){
-      infowindow.open(map, marker);
-    });
-  }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key="#{ENV['GOOGLE_API_KEY']}"&callback=initMap" async defer></script>
+<script type="text/javascript">
+      function initMap() {
+        var test ={lat: <%= @park.latitude %>, lng: <%= @park.longitude %>};
+        var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 17,
+                  center: test
+                  });
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+
+        var contentString = '住所：<%= @park.address %>';
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        var marker = new google.maps.Marker({
+                      position:test,
+                      map: map,
+                      title: contentString
+                    });
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
 
 <table>
   <thead>

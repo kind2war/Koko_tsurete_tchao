@@ -1,15 +1,15 @@
 #都道府県と市区町村のデータベース保存
-require 'csv'
+#require 'csv'
 
-CSVROW_PREFNAME = 6
-CSVROW_CITYNAME = 7
+#CSVROW_PREFNAME = 6
+#CSVROW_CITYNAME = 7
 
-CSV.foreach('db/csv/KEN_ALL.CSV', encoding: "Shift_JIS:UTF-8") do |row|
-  prefecture_name = row[CSVROW_PREFNAME]
-  city_name = row[CSVROW_CITYNAME]
-  prefecture = Prefecture.find_or_create_by(name: prefecture_name)
-  City.find_or_create_by(name: city_name, prefecture_id: prefecture.id)
-end
+#CSV.foreach('db/csv/KEN_ALL.CSV', encoding: "Shift_JIS:UTF-8") do |row|
+#  prefecture_name = row[CSVROW_PREFNAME]
+#  city_name = row[CSVROW_CITYNAME]
+#  prefecture = Prefecture.find_or_create_by(name: prefecture_name)
+#  City.find_or_create_by(name: city_name, prefecture_id: prefecture.id)
+#end
 
 #横須賀市の公園のデータベース保存※特徴などは未記載の軽量版
 CSV.foreach('db/csv/koenjouhou_s.csv', headers: true,  encoding: "Shift_JIS:UTF-8") do |row|
