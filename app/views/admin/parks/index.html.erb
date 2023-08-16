@@ -10,6 +10,8 @@
     <%= f.search_field :address_cont %>
     <%= f.submit '検索'%>
   <%end%>
+<h4>登録</h4>
+<%= render 'admin/parks/form', parks: @parks %>
 <table>
   <thead>
     <tr>

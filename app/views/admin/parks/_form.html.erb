@@ -1,0 +1,19 @@
+<%= form_with url: admin_parks_path do |f| %>
+  <div class="form-group">
+    <%= f.label :park_name %>
+    <%= f.text_field :park_name %>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </div>
+  <div class="form-group">
+    <%= f.collection_check_boxes(:feature_ids, Feature.all, :id, :feature_detail) do |feature| %>
+    <div class="form-check">
+      <%= feature.label class: 'form-check-label' do %>
+          <%= feature.check_box class: 'form-check-input' %>
+          <%= feature.text %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <%= f.submit %>
+<% end %>

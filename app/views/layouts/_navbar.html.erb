@@ -9,6 +9,8 @@
 <!--作業用-->
 <% if member_signed_in? %>
   <%= render 'layouts/headder_members' %>
+<% elsif admin_signed_in? %>
+  <%= render 'layouts/headder_admin' %>
 <% else %>
   <%= render 'layouts/headder_guests' %>
 <% end %>

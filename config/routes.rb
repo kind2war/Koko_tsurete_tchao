@@ -1,18 +1,22 @@
 Rails.application.routes.draw do
 
+  scope module: :admin do
+    root to: "homes#top", as: "admin"
+  end
+
   devise_for :admin,  controllers: {
     registrations: "public/registrations",
     sessions: "admin/sessions"
   }
 
+  namespace :admin do
+    resources :parks
+  end
+
   devise_for :members,  controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
-
-  scope module: :admin do
-    root to: "homes#top", as: "admin"
-  end
 
   scope module: :public do
     root to: "homes#top", as: "root"
