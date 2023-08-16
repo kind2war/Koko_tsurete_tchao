@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "feature_id"
     t.index ["review_id"], name: "index_parks_on_review_id"
   end
 
