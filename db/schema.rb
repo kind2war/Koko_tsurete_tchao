@@ -106,11 +106,16 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
   end
 
   create_table "park_feature_relations", force: :cascade do |t|
+    t.integer "park_id"
+    t.integer "feature_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["feature_id"], name: "index_park_feature_relations_on_feature_id"
+    t.index ["park_id"], name: "index_park_feature_relations_on_park_id"
   end
 
   create_table "parks", force: :cascade do |t|
+    t.integer "feature_id"
     t.integer "review_id"
     t.string "park_name", default: "", null: false
     t.string "address", default: "", null: false
@@ -119,7 +124,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_parks_on_feature_id"
     t.index ["review_id"], name: "index_parks_on_review_id"
   end
 
@@ -156,6 +161,9 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
   add_foreign_key "change_requests", "members"
   add_foreign_key "change_requests", "parks", column: "parks_id"
   add_foreign_key "children", "members"
+  add_foreign_key "park_feature_relations", "features"
+  add_foreign_key "park_feature_relations", "parks"
+  add_foreign_key "parks", "features"
   add_foreign_key "parks", "reviews"
   add_foreign_key "review_comments", "members"
   add_foreign_key "review_comments", "parks"

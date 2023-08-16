@@ -1,5 +1,6 @@
-<%= link_to "My page", mypage_path, class: 'btn btn-outline-secondary w-auto' %>
-<%= link_to "公園一覧", parks_path, class: 'btn btn-outline-secondary w-auto' %>
-    <!--公園検索-->
-<%= link_to "About", about_path, class: 'btn btn-outline-secondary w-auto' %>
-<%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: 'btn btn-outline-secondary w-auto' %>
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+    <li class="nav-item"><a class="nav-link" href="/mypage">MyPage</a></li>
+    <li class="nav-item"><a class="nav-link" href="/parks">公園一覧</a></li>
+    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+    <li class="nav-item"><a class="nav-link active" href="/members/sign_out">ログアウト</a></li>
+</ul>

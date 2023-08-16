@@ -12,16 +12,16 @@
 #end
 
 #横須賀市の公園のデータベース保存※特徴などは未記載の軽量版
-#CSV.foreach('db/csv/koenjouhou_s.csv', headers: true,  encoding: "Shift_JIS:UTF-8") do |row|
-#  Park.create(
-#    id: row['id'],
-#    park_name: row['park_name'],
-#    address: row['address'],
-#    park_type: row['park_type'],
-#    latitude: row['latitude'],
-#    longitude: row['longitude']
-#  )
-#end
+CSV.foreach('db/csv/koenjouhou_s.csv', headers: true,  encoding: "Shift_JIS:UTF-8") do |row|
+  Park.create(
+    id: row['id'],
+    park_name: row['park_name'],
+    address: row['address'],
+    park_type: row['park_type'],
+    latitude: row['latitude'],
+    longitude: row['longitude']
+  )
+end
 
 #管理者アカウントの作成
   admin = [{email: 'sample@example.com', password:'000000' }]
@@ -29,9 +29,12 @@
     Admin.create!(record) unless Admin.find_by(email: record[:email])
   end
 
-  Feature.create([
+#初期タグの作成
+  feature = [
     {feature_detail: 'トイレ'},
     {feature_detail: '多機能トイレ'},
     {feature_detail: '水飲み場・手洗い場'},
     {feature_detail: '駐車場'}
-    ])
+    ]
+  feature.each do |record|
+    Feature.create!(record) unless Feature.find_by(feature_detail: record[:feature_detail])

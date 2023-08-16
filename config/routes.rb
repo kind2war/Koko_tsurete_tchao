@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   scope module: :admin do
-    root to: "homes#top", as: "admin"
+    get '/admin' => "homes#top", as: "admin"
   end
 
   devise_for :admin,  controllers: {

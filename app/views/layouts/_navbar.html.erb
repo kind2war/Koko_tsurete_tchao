@@ -1,25 +1,28 @@
-<!-- logo部分 -->
-<a class="navbar-brand" href="/">LOGO</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">ココつれてっちゃお</a>
+          <% if member_signed_in? %>
+          <%= "ようこそ、#{ current_member.account_name } さん！" %>
+          <% end %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <% if member_signed_in? %>
+            <%= render 'layouts/headder_members' %>
+          <% elsif admin_signed_in? %>
+            <%= render 'layouts/headder_admin' %>
+          <% else %>
+            <%= render 'layouts/headder_guests' %>
+          <% end %>
+        </div>
+    </div>
+</nav>
 
-<!--ログイン中のアカウント名の表示-->
-<% if member_signed_in? %>
-<%= "ようこそ、#{ current_member.account_name } さん！" %>
-<% end %>
 
-<!--作業用-->
-<% if member_signed_in? %>
-  <%= render 'layouts/headder_members' %>
-<% elsif admin_signed_in? %>
-  <%= render 'layouts/headder_admin' %>
-<% else %>
-  <%= render 'layouts/headder_guests' %>
-<% end %>
 
-<!--　管理者用あり　-->
-<%# if admin_signed_in? %>
-  <%#= render 'layouts/headder_admin' %>
-<%# elsif customer_signed_in? %>
-  <%#= render 'layouts/headder_customer' %>
-<%# else %>
-  <%#= render 'layouts/headder_guest' %>
-<%# end %>
+
+
+
+
+
+
+

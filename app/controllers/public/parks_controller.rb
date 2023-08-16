@@ -28,4 +28,7 @@ private
   def set_q
     @q = Park.ransack(params[:q])
   end
+
+  
+
 end

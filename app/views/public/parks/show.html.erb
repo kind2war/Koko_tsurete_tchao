@@ -1,4 +1,4 @@
-<h1>公園詳細</h1>
+<!-- Page content-->
 <% if @review.errors.any? %>
   <div class = "alert">
     <ul>
@@ -8,7 +8,110 @@
     </ul>
   </div>
 <% end %>
-<div id='map'></div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                  <!-- Post title-->
+                  <h1 class="fw-bolder mb-1"><%= @park.park_name %></h1>
+                  <!-- Post meta content-->
+                  <div class="text-muted fst-italic mb-2">Posted on <%= @park.created_at %> by admin</div>
+                  <!-- Post categories-->
+                  <a class="badge bg-secondary text-decoration-none link-light"><%= @park.park_type %></a>
+                </header>
+                <!-- Preview MAP figure-->
+                <figure class="mb-4"><div id='map'></div></figure>
+
+                <!-- Post content-->
+                <section class="mb-5">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>NO.</th>
+                        <th>名称</th>
+                        <th>所在地</th>
+                        <th>種別</th>
+                        <th>緯度</th>
+                        <th>経度</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td><%= @park.id %></td>
+                        <td><%= @park.park_name %></td>
+                        <td><%= @park.address %></td>
+                        <td><%= @park.park_type %></td>
+                        <td><%= @park.latitude %></td>
+                        <td><%= @park.longitude %></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+            </article>
+            <!-- Comments section-->
+            <section class="mb-5">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <!-- Comment form-->
+                        <form class="mb-4"><%= render "public/reviews/form.html.erb", {park: @park, review: @review } %><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                        <!-- Comment with nested comments-->
+                        <div class="d-flex mb-4">
+                            <!-- Parent comment-->
+                            <% @reviews.each do |review| %>
+                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                            <div class="ms-3">
+                                <div class="fw-bold"><%= review.title %></div>
+                                <%= review.review_detail %>
+                                <%= review.member.account_name %>
+                                  <% if @member == current_member %>
+                                  <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %></td>
+                                  <% end %>
+                            <%end%>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+            <!-- Search widget-->
+            <div class="card mb-4">
+                <div class="card-header">Search</div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Categories widget-->
+            <div class="card mb-4">
+              <div class="card-header">特徴・特色</div>
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                      <% @park.features.each do |tag| %>
+                      <ul class="list-unstyled mb-0">
+                        <li><a href="#!"><%= tag.features_detail %></a></li>
+                      </ul>
+                      <%end%>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- Side widget-->
+            <div class="card mb-4">
+                <div class="card-header">レビュー投稿</div>
+                <div class="card-body"></div>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
       function initMap() {
         var test ={lat: <%= @park.latitude %>, lng: <%= @park.longitude %>};
@@ -34,70 +137,4 @@
         });
       }
     </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
-
-<table>
-  <thead>
-    <tr>
-      <th>NO.</th>
-      <th>名称</th>
-      <th>所在地</th>
-      <th>種別</th>
-      <th>緯度</th>
-      <th>経度</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td><%= @park.id %></td>
-      <td><%= @park.park_name %></td>
-      <td><%= @park.address %></td>
-      <td><%= @park.park_type %></td>
-      <td><%= @park.latitude %></td>
-      <td><%= @park.longitude %></td>
-    </tr>
-  </tbody>
-</table>
-
-<!--投稿されたレビューを表示させる-->
-<table>
-
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Review Detail</th>
-      <th>Auther</th>
-      <th></th>
-    </tr>
-  </thead>
-    <% @reviews.each do |review| %>
-  <tbody>
-    <tr>
-      <td><%= review.title %></td>
-      <td><%= review.review_detail %></td>
-      <td><%= review.member.account_name %></td>
-      <% if @member == current_member %>
-      <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %></td>
-      <% end %>
-    </tr>
-  </tbody>
-  <%end%>
-</table>
-
-<!--「まだレビューは投稿されていません」-->
-<!--レビュー投稿フォーム-->
-<%= render "public/reviews/form.html.erb", {park: @park, review: @review } %>
-
-
-
-
-
-<!--
-<div id="comment">
-  <%#= render 'public/review_comments/comment', {park: @park} %>
-</div>
-<div id="comment_form">
-  <%#= render 'public/review_comments/comment_form', {park: @park, review_comment: @review_comment} %>
-</div>
--->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
