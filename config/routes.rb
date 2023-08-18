@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       collection { post :import }
       collection do
         get 'search'
+        get "search_tag" => "parks#search_tag"
       end
       #resources :review_comments, only: [:create, :destroy]
     end

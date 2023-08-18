@@ -5,5 +5,7 @@ class CreateParkFeatureRelations < ActiveRecord::Migration[6.1]
       t.references :feature, foreign_key: true
       t.timestamps
     end
+    add_index :park_feature_relations, [:park_id, :feature_id], unique: true
   end
 end
+

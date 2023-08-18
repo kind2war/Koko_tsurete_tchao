@@ -80,9 +80,12 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
   end
 
   create_table "features", force: :cascade do |t|
+    t.integer "park_id"
     t.string "feature_detail"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["feature_detail"], name: "index_features_on_feature_detail", unique: true
+    t.index ["park_id"], name: "index_features_on_park_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -111,6 +114,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["feature_id"], name: "index_park_feature_relations_on_feature_id"
+    t.index ["park_id", "feature_id"], name: "index_park_feature_relations_on_park_id_and_feature_id", unique: true
     t.index ["park_id"], name: "index_park_feature_relations_on_park_id"
   end
 
@@ -161,6 +165,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
   add_foreign_key "change_requests", "members"
   add_foreign_key "change_requests", "parks", column: "parks_id"
   add_foreign_key "children", "members"
+  add_foreign_key "features", "parks"
   add_foreign_key "park_feature_relations", "features"
   add_foreign_key "park_feature_relations", "parks"
   add_foreign_key "parks", "features"

@@ -18,6 +18,11 @@ class Public::ParksController < ApplicationController
     @results = @q.result
   end
 
+  def search_tag
+    @tag_list = Feature.all
+    @tag = Feature.find(params[:feature_id])
+    @parks = @tag.parks
+
   #csvインポートフォーム用
   def import
     Park.import(params[:file])
@@ -29,6 +34,6 @@ private
     @q = Park.ransack(params[:q])
   end
 
-  
+
 
 end

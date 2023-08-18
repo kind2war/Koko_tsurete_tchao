@@ -27,31 +27,7 @@
                 <figure class="mb-4"><div id='map'></div></figure>
 
                 <!-- Post content-->
-                <section class="mb-5">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>NO.</th>
-                        <th>名称</th>
-                        <th>所在地</th>
-                        <th>種別</th>
-                        <th>緯度</th>
-                        <th>経度</th>
-                      </tr>
-                    </thead>
 
-                    <tbody>
-                      <tr>
-                        <td><%= @park.id %></td>
-                        <td><%= @park.park_name %></td>
-                        <td><%= @park.address %></td>
-                        <td><%= @park.park_type %></td>
-                        <td><%= @park.latitude %></td>
-                        <td><%= @park.longitude %></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </section>
             </article>
             <!-- Comments section-->
             <section class="mb-5">
@@ -96,7 +72,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                       <% @park.features.each do |tag| %>
-                      <ul class="list-unstyled mb-0">
+                      <ul class="badge bg-secondary text-decoration-none link-light">
                         <li><a href="#!"><%= tag.features_detail %></a></li>
                       </ul>
                       <%end%>
