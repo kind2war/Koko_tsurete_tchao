@@ -5,9 +5,13 @@ Rails.application.routes.draw do
   end
 
   devise_for :admin,  controllers: {
-    registrations: "public/registrations",
+    registrations: "admin/registrations",
     sessions: "admin/sessions"
   }
+
+  devise_scope :admin do
+    get '/admin/sign_out' => 'devise/sessions#destroy'
+  end
 
   namespace :admin do
     resources :parks
@@ -19,13 +23,17 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
+  devise_scope :member do
+    get '/members/sign_out' => 'devise/sessions#destroy'
+  end
+
   scope module: :public do
     root to: "homes#top", as: "root"
     get '/about' => 'homes#about', as: "about"
     resources :maps, only: [:index]
       get '/map_request', to: 'maps#map', as: 'map_request'
     resources :parks, only: [:show, :index] do
-      resources :reviews, only: [:create]
+      resources :reviews, only: [:create, :destroy]
       collection { post :import }
       collection do
         get 'search'
@@ -33,7 +41,6 @@ Rails.application.routes.draw do
       end
       #resources :review_comments, only: [:create, :destroy]
     end
-    resources :reviews, only: [:show, :edit, :update, :destroy]
     resources :members, only: :index
       get '/mypage', to: 'members#show', as: 'mypage'
   end

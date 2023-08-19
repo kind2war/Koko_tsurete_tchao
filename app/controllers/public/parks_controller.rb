@@ -4,9 +4,9 @@ class Public::ParksController < ApplicationController
 
   def show
     @park = Park.find(params[:id])
-    @review_comment = ReviewComment.new
     @review = Review.new
-    @reviews = @park.reviews.all
+    #@review_comment = ReviewComment.new
+    #@reviews = @park.reviews.all
     @member = current_member
   end
 

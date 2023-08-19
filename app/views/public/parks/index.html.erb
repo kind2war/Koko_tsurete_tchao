@@ -1,12 +1,16 @@
 <div class="container">
   <h2>公園一覧</h2>
   <div class="d-flex flex-row mb-6">
-    <div class ="form-group  d-inline col-md-4">
+    <div class="form-group  d-inline col-md-4">
       <%= search_form_for @q, url: search_parks_path do |f| %>
-        <div class="p-2"><%= f.label :park_name_or_address_or_park_type_cont, '◆検索'%></div>
-        <div class="p-2"><%= f.search_field :park_name_or_address_or_park_type_cont, class: 'form-control' %></div>
-        <button type="button" class="btn btn-primary btn-sm"><%= f.submit %></button>
-      <%end%>
+        <div class="p-2">
+          <%= f.label :park_name_or_address_or_park_type_cont, '◆検索'%>
+        </div>
+        <div class="p-2">
+          <%= f.search_field :park_name_or_address_or_park_type_cont, class: 'form-control' %>
+        </div>
+        <button type="button"><%= f.submit class:"btn-primary btn-sm" %></button>
+        <%end%>
     </div>
   </div>
 </div>
@@ -16,26 +20,50 @@
     <table>
       <thead>
         <tr>
-          <th><%= sort_link(@q, :id, "NO.") %></th>
-          <th><%= sort_link(@q, :park_name, "名称" )%></th>
-          <th><%= sort_link(@q, :address, "所在地")%></th>
-          <th><%= sort_link(@q, :park_type, "種別")%></th>
-          <th><%= sort_link(@q, :latitude, "緯度")%></th>
-          <th><%= sort_link(@q, :longitude,"経度")%></th>
+          <th>
+            <%= sort_link(@q, :id, "NO.") %>
+          </th>
+          <th>
+            <%= sort_link(@q, :park_name, "名称" )%>
+          </th>
+          <th>
+            <%= sort_link(@q, :address, "所在地")%>
+          </th>
+          <th>
+            <%= sort_link(@q, :park_type, "種別")%>
+          </th>
+          <th>
+            <%= sort_link(@q, :latitude, "緯度")%>
+          </th>
+          <th>
+            <%= sort_link(@q, :longitude,"経度")%>
+          </th>
         </tr>
       </thead>
 
       <tbody>
         <% @parks.each do |park| %>
           <tr>
-            <td width="50px"><%= park.id %></td>
-            <td><%= link_to park.park_name, park %></td>
-            <td><%= park.address %></td>
-            <td><%= park.park_type %></td>
-            <td><%= park.latitude %></td>
-            <td><%= park.longitude %></td>
+            <td width="50px">
+              <%= park.id %>
+            </td>
+            <td>
+              <%= link_to park.park_name, park %>
+            </td>
+            <td>
+              <%= park.address %>
+            </td>
+            <td>
+              <%= park.park_type %>
+            </td>
+            <td>
+              <%= park.latitude %>
+            </td>
+            <td>
+              <%= park.longitude %>
+            </td>
           </tr>
-        <% end %>
+          <% end %>
       </tbody>
     </table>
   </div>

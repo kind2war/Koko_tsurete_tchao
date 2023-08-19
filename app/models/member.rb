@@ -15,6 +15,4 @@ class Member < ApplicationRecord
   validates :password,     presence: true
 
   enum sex: { man: 0, woman: 1}
-  enum spouse: { with_spouse: 0, not_with_spouse: 1 }
-  enum children: { with_children: 0, not_with_children: 1 }
 end

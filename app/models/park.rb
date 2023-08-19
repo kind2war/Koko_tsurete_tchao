@@ -9,8 +9,6 @@ class Park < ApplicationRecord
   after_validation :geocode, if: :address_changed?
   #has_many :review_comments, dependent: :destroy
 
-  def current_position
-  end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
@@ -20,7 +18,6 @@ class Park < ApplicationRecord
     end
   end
 
-    # 更新を許可するカラムを定義
   def self.updatable_attributes
     ["id", "park_name", "address","park_type","latitude","longitude","feature_ids"]
   end

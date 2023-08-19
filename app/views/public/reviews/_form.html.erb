@@ -1,15 +1,27 @@
 <% if member_signed_in? %>
-  <%= form_with model:[park, review], local: true do |f| %>
+  <%= form_with( model:[park,review],method: :post ) do |f| %>
+   <% if review.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+        <ul>
+          <% review.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
     <div class="form-group">
     <%= f.label :title %>
-    <%= f.text_field :title,  class: 'form-control review_title' %>
+    <%= f.text_field :title,  class: 'form-control title' %>
     </div>
     <div class ="form-group">
     <%= f.label :review_detail %>
-    <%= f.text_area :review_detail,  class: 'form-control review_detail' %>
+    <%= f.text_area :review_detail, rows: '5', placeholder: "コメントをここに",  class: 'form-control review_detail' %>
     </div>
     <%= f.submit %>
   <%end%>
 <%else%>
-  <div>レビューを投稿する場合は、ログインをしてください。</div>
+ログイン後にレビュー投稿ができます。
 <%end%>

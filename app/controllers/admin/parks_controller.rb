@@ -1,5 +1,6 @@
 class Admin::ParksController < ApplicationController
   before_action :set_q, only: [:index, :search]
+  before_action :authenticate_admin!
 
   def new
     @park = Park.new
