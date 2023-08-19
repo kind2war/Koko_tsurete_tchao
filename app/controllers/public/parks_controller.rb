@@ -22,6 +22,7 @@ class Public::ParksController < ApplicationController
     @tag_list = Feature.all
     @tag = Feature.find(params[:feature_id])
     @parks = @tag.parks
+  end
 
   #csvインポートフォーム用
   def import

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :parks
+    resources :features, only: [:index, :create, :destroy]
   end
 
   devise_for :members,  controllers: {

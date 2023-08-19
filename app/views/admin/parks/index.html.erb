@@ -1,29 +1,16 @@
 <div class="container">
   <h2>公園一覧</h2>
-  <h4>◆検索</h4>
-  <div class="row">
-    <div class="col-sm-3">
-      <div class ="form-group">
-        <%= search_form_for @q, url: search_parks_path do |f| %>
-          <%= f.label :park_name_cont, '名称'%>
-          <%= f.search_field :park_name_cont, class: 'form-control park_name_cont' %>
-        <%= f.submit '検索'%>
-        <%end%>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class ="form-group">
-        <%= search_form_for @q, url: search_parks_path do |f| %>
-          <%= f.label :address_cont, '所在地'%>
-          <%= f.search_field :address_cont, class: 'form-control address_cont' %>
-          <%= f.submit '検索'%>
-        <%end%>
-      </div>
+  <div class="d-flex flex-row mb-6">
+    <div class ="form-group col-md-4">
+      <%= search_form_for @q, url: search_parks_path do |f| %>
+        <div class="p-2"><%= f.label :park_name_or_address_or_park_type_cont, '◆検索'%></div>
+        <div class="p-2"><%= f.search_field :park_name_or_address_or_park_type_cont, class: 'form-control park_name_cont' %></div>
+        <div class="p-2"><%= f.submit '検索', class:"btn btn-primary btn-sm"%></div>
+      <%end%>
     </div>
   </div>
 </div>
   <%= render 'admin/parks/form', parks: @parks %>
-
 <div class="container">
   <table>
     <thead>

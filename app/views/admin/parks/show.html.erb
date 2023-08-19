@@ -1,0 +1,133 @@
+<!-- Page content-->
+<% if @review.errors.any? %>
+  <div class="alert">
+    <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- Post content-->
+          <article>
+            <!-- Post header-->
+            <header class="mb-4">
+              <!-- Post title-->
+              <h1 class="fw-bolder mb-1">
+                <%= @park.park_name %>
+              </h1>
+              <!-- Post meta content-->
+              <div class="text-muted fst-italic mb-2">Posted on
+                <%= @park.created_at %> by admin
+                <%=link_to '編集する', edit_admin_park_path(@park), class:"text-muted fst-italic mb-2"%></div>
+              <!-- Post categories-->
+              <a class="badge bg-secondary text-decoration-none link-light">
+                <%= @park.park_type %>
+              </a>
+            </header>
+            <!-- Preview MAP figure-->
+            <figure class="mb-4">
+              <div id='map'></div>
+            </figure>
+
+            <!-- Post content-->
+
+          </article>
+          <!-- Comments section-->
+          <section class="mb-5">
+            <div class="card bg-light">
+              <div class="card-body">
+                <!-- Comment form-->
+                <form class="mb-4">
+                  <%= render "public/reviews/form.html.erb", {park: @park, review: @review } %><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                <!-- Comment with nested comments-->
+                <div class="d-flex mb-4">
+                  <!-- Parent comment-->
+                  <% @reviews.each do |review| %>
+                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                    <div class="ms-3">
+                      <div class="fw-bold">
+                        <%= review.title %>
+                      </div>
+                      <%= review.review_detail %>
+                        <%= review.member.account_name %>
+                          <% if @member == current_member %>
+                            <td>
+                              <%= link_to 'Destroy', review, method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %>
+                            </td>
+                            <% end %>
+                              <%end%>
+
+                    </div>
+                </div>
+          </section>
+          </div>
+          <!-- Side widgets-->
+          <div class="col-lg-4">
+            <!-- Search widget-->
+            <div class="card mb-4">
+              <div class="card-header">Search</div>
+              <div class="card-body">
+                <div class="input-group">
+                  <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search"
+                  />
+                  <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                </div>
+              </div>
+            </div>
+            <!-- Categories widget-->
+            <div class="card mb-4">
+              <div class="card-header">特徴・特色</div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <% @park.features.each do |tag| %>
+                      <ul class="badge bg-secondary text-decoration-none link-light">
+                        <li>
+                          <a href="#!" style="color:#F5F5F5">
+                            <%= tag.feature_detail %>
+                          </a>
+                        </li>
+                      </ul>
+                      <%end%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Side widget-->
+            <div class="card mb-4">
+              <div class="card-header">レビュー投稿</div>
+              <div class="card-body"></div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          function initMap() {
+            var test ={lat: <%= @park.latitude %>, lng: <%= @park.longitude %>};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                      zoom: 17,
+                      center: test
+                      });
+            var transitLayer = new google.maps.TransitLayer();
+            transitLayer.setMap(map);
+
+            var contentString = '住所：<%= @park.address %>';
+            var infowindow = new google.maps.InfoWindow({
+              content: contentString
+            });
+            var marker = new google.maps.Marker({
+                          position:test,
+                          map: map,
+                          title: contentString
+                        });
+
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            });
+          }
+        </script>

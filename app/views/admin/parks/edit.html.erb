@@ -1,7 +1,7 @@
 <div class="container">
   <div class="form-group d-flex flex-row">
     <div class="col-md-3">
-      <%= form_with model: @park,url: admin_parks_path, local: true do |f| %>
+      <%= form_with model: @park ,url: admin_park_path do |f| %>
         <%= f.label :park_name, '◆登録　＊名称 '%>
         <%= f.text_field :park_name, class:"form-control" %>
     </div>

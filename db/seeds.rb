@@ -12,16 +12,30 @@
 #end
 
 #横須賀市の公園のデータベース保存※特徴などは未記載の軽量版
-CSV.foreach('db/csv/koenjouhou_s.csv', headers: true,  encoding: "Shift_JIS:UTF-8") do |row|
-  Park.create(
-    id: row['id'],
-    park_name: row['park_name'],
-    address: row['address'],
-    park_type: row['park_type'],
-    latitude: row['latitude'],
-    longitude: row['longitude']
-  )
-end
+#require 'csv'
+#
+#def upsert_seeds(model: )
+#  now = Time.zone.now
+#  timestamps = { created_at: now, updated_at: now }
+#  file = File.read("db/csv/#{model.to_s.underscore.pluralize}.csv", encoding: "Shift_JIS:UTF-8")
+#  records = CSV.parse(file, headers: true).map do |row|
+#    row.to_h.merge(timestamps)
+#  end
+#  model.upsert_all(records)
+#end
+
+#upsert_seeds(model: Park)
+
+#CSV.foreach('db/csv/parks.csv', headers: true,  encoding: "Shift_JIS:UTF-8") do |row|
+#  Park.create(
+#    id: row['id'],
+#    park_name: row['park_name'],
+#    address: row['address'],
+#    park_type: row['park_type'],
+#    latitude: row['latitude'],
+#    longitude: row['longitude']
+#  )
+#end
 
 #管理者アカウントの作成
   admin = [{email: 'sample@example.com', password:'000000' }]
@@ -38,3 +52,4 @@ end
     ]
   feature.each do |record|
     Feature.create!(record) unless Feature.find_by(feature_detail: record[:feature_detail])
+  end

@@ -7,16 +7,21 @@ class Admin::ParksController < ApplicationController
 
   def create
     @park = Park.create(park_params)
-    @park.save
-    redirect_to admin_parks_path
+    if @park.save
+      redirect_to admin_park_path(@park)
+    else
+      @parks = Park.all
+      render admin_parks_path
+    end
   end
 
   def edit
-    @park = Park.find(params[:id]) # DBから既存のものを取得
+    @park = Park.find(params[:id])
   end
 
   def update
-    Park.find(params[:id]).update(park_params)
+    @park = Park.find(params[:id]).update(park_params)
+    redirect_to admin_parks_path
   end
 
   def index
@@ -39,7 +44,7 @@ private
   end
 
   def park_params
-    params.require(:park).permit(:park_name, :address,:park_type, :latitude, :longitude,  feature_id: [], images:[])
+    params.require(:park).permit(:park_name, :address,:park_type, :latitude, :longitude,  feature_ids: [], images:[])
   end
 
 end

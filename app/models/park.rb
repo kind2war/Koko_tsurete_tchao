@@ -25,8 +25,12 @@ class Park < ApplicationRecord
     ["id", "park_name", "address","park_type","latitude","longitude","feature_ids"]
   end
 
- def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(auth_object = nil)
     ["address", "feature_id", "id", "park_name", "park_type"]
- end
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["change_requests", "features", "image_attachments", "image_blobs", "members", "park_feature_relations", "reviews"]
+  end
 
 end
