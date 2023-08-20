@@ -1,26 +1,30 @@
-<h1>検索結果</h1>
-<table>
-  <thead>
-    <tr>
-      <th><% sort_link(@q, :id, "NO.") %></th>
-      <th><% sort_link(@q, :park_name, "名称" )%></th>
-      <th><% sort_link(@q, :address, "所在地")%></th>
-      <th><% sort_link(@q, :park_type, "種別")%></th>
-      <th><% sort_link(@q, :latitude, "緯度")%></th>
-      <th><% sort_link(@q, :longitude,"経度")%></th>
-    </tr>
-  </thead>
+<div class="container">
+  <h2>「<%= params[:q][:park_name_or_address_or_park_type_cont] if params[:q].present? %>」の検索結果（<%= @results.size %>件）</h2>
 
-  <tbody>
-    <% @results.each do |park| %>
+<% if @results.present? %>
+  <table>
+    <thead>
       <tr>
-        <td><%= park.id %></td>
-        <td><%= link_to park.park_name, park %></td>
-        <td><%= park.address %></td>
-        <td><%= park.park_type %></td>
-        <td><%= park.latitude %></td>
-        <td><%= park.longitude %></td>
+        <th><%= sort_link(@q, :id, "NO.") %></th>
+        <th><%= sort_link(@q, :park_name, "名称" )%></th>
+        <th><%= sort_link(@q, :address, "所在地")%></th>
+        <th><%= sort_link(@q, :park_type, "種別")%></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @results.each do |park| %>
+        <tr>
+          <td><%= park.id %></td>
+          <td><%= link_to park.park_name, park %></td>
+          <td><%= park.address %></td>
+          <td><%= park.park_type %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  一致する結果がありませんでした。
+<% end %>
+</div>
+

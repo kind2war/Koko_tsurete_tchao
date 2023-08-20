@@ -39,26 +39,31 @@
             <!-- Post content-->
           </article>
 
-          <article>
-            <% @park.reviews.each do |review| %>
-              <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-              <div class="ms-3">
-                <div class="fw-bold">
-                  <div class="card-header"><%= review.title %></div>
+          <section class="mb-5">
+            <div class="card bg-light">
+              <div class="card-body">
+                <div class="d-flex mb-4">
+                  <!-- Parent comment-->
+                    <% @park.reviews.each do |review| %>
+                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                    <div class="ms-3">
+                      <div class="fw-bold">投稿者:<%= review.member.account_name %>『<%= review.title %>』</div>
+                      <div class="text-muted fst-italic mb-2">Posted on
+                        <%= @park.created_at %>
+                        <% if @member == current_member %>
+                          <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %>
+                          <%#=link_to '編集', , class:"text-muted fst-italic mb-2"%>
+                        <% end %>
+                      </div>
+                        <%= review.review_detail %>
+                   </div>
                 </div>
-                <div class="card-body"><%= review.review_detail %>
-                  <%= review.member.account_name %>
-                    <% if @member == current_member %>
-                      <td>
-                        <%= link_to 'Destroy', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %>
-                      </td>
-                      <% end %>
-                </div>
-                        <%end%>
-          </article>
-
-          <!-- Parent comment-->
+                    <%end%>
+              </div>
+            </div>
+          </section>
         </div>
+
         <!-- Side widgets-->
         <div class="col-lg-4">
           <!-- Search widget-->
@@ -80,9 +85,7 @@
                   <% @park.features.each do |tag| %>
                     <ul class="badge bg-secondary text-decoration-none link-light">
                       <li>
-                        <a href="#!" style="color:#F5F5F5">
-                          <%= tag.feature_detail %>
-                        </a>
+                        <a href="#!" style="color:#F5F5F5"><%= tag.feature_detail %></a>
                       </li>
                     </ul>
                     <%end%>
@@ -99,14 +102,13 @@
                 <div class="mb-4">
                   <%= render "public/reviews/form.html.erb", {park: @park, review: @review } %>
                 </div>
-                <!-- Comment with nested comments-->
-                <div class="d-flex mb-4"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
         <script type="text/javascript">
           function initMap() {
             var test ={lat: <%= @park.latitude %>, lng: <%= @park.longitude %>};

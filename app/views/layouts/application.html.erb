@@ -3,7 +3,7 @@
   <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,8 +15,11 @@
   </head>
 
   <body>
-    <header><%= render 'layouts/navbar' %></header>
+    <header>
+      <%= render 'layouts/navbar' %>
+    </header>
       <%= yield %>
+
     <!-- Footer-->
     <footer class="py-5 bg-dark">
       <div class="container"><p class="m-0 text-center text-white">Copyright &copy; ココつれてっちゃお 2023</p></div>
