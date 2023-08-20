@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="form-group d-flex flex-row">
+    <div class="col-md-3">
+      <%= form_with model: @park ,url: admin_park_path do |f| %>
+        <%= f.label :park_name, '◆登録　＊名称 '%>
+        <%= f.text_field :park_name, class:"form-control" %>
+    </div>
+      <div class="col-md-3">
+        <%= f.label :address,'＊所在地' %>
+        <%= f.text_field :address, class:"form-control" %>
+      </div>
+  </div>
+  <div class="form-group d-flex flex-row">
+    <div class="col-md-1">
+      <div class="p-2"><%= f.label :feature_ids, '＊タグ' %></div>
+    </div>
+    <div class="form-check form-check-inline border d-flex flex-row flex-warp">
+      <%= f.collection_check_boxes(:feature_ids, Feature.all, :id, :feature_detail) do |tag| %>
+        <%= tag.label class: 'form-check-label' do %>
+          <div class="mx-4 mt-2">
+          <%= tag.check_box class: 'form-check-input' %>
+          <%= tag.label %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-2">
+      <%= f.submit class:"btn btn-primary btn-sm"%>
+      <% end %>
+    </div>
+  </div>
+</div>
+

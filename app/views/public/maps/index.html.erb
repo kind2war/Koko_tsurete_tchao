@@ -1,0 +1,18 @@
+<h2>公園マップ</h2>
+<%= form_with url: map_request_path, method: :get, local: false do |f| %>
+  <%= f.text_field :address %>
+  <%= f.submit '地図を表示' %>
+<% end %>
+
+<div id='map'></div>
+<script>
+  let mapInstance
+
+  function initMap(){
+    mapInstance = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 35.281, lng: 139.672},
+    zoom: 10
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>

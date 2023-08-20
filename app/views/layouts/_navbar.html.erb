@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <% if admin_signed_in? %>
+        <a class="navbar-brand" href="/admin">ココつれてっちゃお</a>
+      <% else %>
+        <a class="navbar-brand" href="/">ココつれてっちゃお</a>
+      <% end %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <% if member_signed_in? %>
+                <%= render 'layouts/headder_members' %>
+              <% elsif admin_signed_in? %>
+                <%= render 'layouts/headder_admin' %>
+              <% else %>
+                <%= render 'layouts/headder_guests' %>
+              <% end %>
+            </ul>
+          </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
