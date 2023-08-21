@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
   create_table "change_requests", force: :cascade do |t|
     t.integer "member_id"
     t.integer "parks_id"
-    t.text "order_detail", default: "", null: false
+    t.text "order_detail", null: false
     t.integer "request_status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.integer "member_id"
     t.integer "park_id"
     t.string "title", default: "", null: false
-    t.text "review_detail", default: "", null: false
+    t.text "review_detail", null: false
     t.boolean "draft_flag", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
