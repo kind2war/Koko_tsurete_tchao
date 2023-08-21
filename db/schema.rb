@@ -54,13 +54,11 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
 
   create_table "change_requests", force: :cascade do |t|
     t.integer "member_id"
-    t.integer "parks_id"
+    t.integer "park_id"
     t.text "order_detail", null: false
     t.integer "request_status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_change_requests_on_member_id"
-    t.index ["parks_id"], name: "index_change_requests_on_parks_id"
   end
 
   create_table "children", force: :cascade do |t|
@@ -69,7 +67,6 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.date "birth_date", default: "2020-01-01", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_children_on_member_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -84,8 +81,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.string "feature_detail"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["feature_detail"], name: "index_features_on_feature_detail", unique: true
-    t.index ["park_id"], name: "index_features_on_park_id"
+    t.index ["feature_detail"], name: "index_features_on_feature_detail"
   end
 
   create_table "members", force: :cascade do |t|
@@ -113,9 +109,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.integer "feature_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["feature_id"], name: "index_park_feature_relations_on_feature_id"
     t.index ["park_id", "feature_id"], name: "index_park_feature_relations_on_park_id_and_feature_id", unique: true
-    t.index ["park_id"], name: "index_park_feature_relations_on_park_id"
   end
 
   create_table "parks", force: :cascade do |t|
@@ -128,8 +122,6 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["feature_id"], name: "index_parks_on_feature_id"
-    t.index ["review_id"], name: "index_parks_on_review_id"
   end
 
   create_table "prefectures", force: :cascade do |t|
@@ -144,8 +136,6 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.integer "park_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_review_comments_on_member_id"
-    t.index ["park_id"], name: "index_review_comments_on_park_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -156,22 +146,8 @@ ActiveRecord::Schema.define(version: 2023_08_16_014449) do
     t.boolean "draft_flag", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_reviews_on_member_id"
-    t.index ["park_id"], name: "index_reviews_on_park_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "change_requests", "members"
-  add_foreign_key "change_requests", "parks", column: "parks_id"
-  add_foreign_key "children", "members"
-  add_foreign_key "features", "parks"
-  add_foreign_key "park_feature_relations", "features"
-  add_foreign_key "park_feature_relations", "parks"
-  add_foreign_key "parks", "features"
-  add_foreign_key "parks", "reviews"
-  add_foreign_key "review_comments", "members"
-  add_foreign_key "review_comments", "parks"
-  add_foreign_key "reviews", "members"
-  add_foreign_key "reviews", "parks"
 end

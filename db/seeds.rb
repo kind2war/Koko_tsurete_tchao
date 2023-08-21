@@ -26,16 +26,16 @@
 
 #upsert_seeds(model: Park)
 
-#CSV.foreach('db/csv/parks.csv', headers: true,  encoding: "Shift_JIS:UTF-8") do |row|
-#  Park.create(
-#    id: row['id'],
-#    park_name: row['park_name'],
-#    address: row['address'],
-#    park_type: row['park_type'],
-#    latitude: row['latitude'],
-#    longitude: row['longitude']
-#  )
-#end
+CSV.foreach('db/csv/parks.csv', headers: true,  encoding: "Shift_JIS:UTF-8") do |row|
+  Park.create(
+    id: row['id'],
+    park_name: row['park_name'],
+    address: row['address'],
+    park_type: row['park_type'],
+    latitude: row['latitude'],
+    longitude: row['longitude']
+  )
+end
 
 #管理者アカウントの作成
   admin = [{email: 'sample@example.com', password:'000000' }]
