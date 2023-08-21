@@ -64,7 +64,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'ransack'
 gem 'geocoder'
 gem 'dotenv-rails'
-gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end

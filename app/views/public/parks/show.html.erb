@@ -3,10 +3,8 @@
   <div class="alert">
     <ul>
       <% @review.errors.full_messages.each do |message| %>
-        <li>
-          <%= message %>
-        </li>
-        <% end %>
+        <li><%= message %></li>
+      <% end %>
     </ul>
   </div>
   <% end %>
@@ -25,40 +23,48 @@
               <!-- Post meta content-->
               <div class="text-muted fst-italic mb-2">Posted on
                 <%= @park.created_at %> by admin
-                  <%=link_to '編集する', edit_admin_park_path(@park), class:"text-muted fst-italic mb-2"%>
-              </div>
+                <%=link_to '編集する', edit_admin_park_path(@park), class:"text-muted fst-italic mb-2"%></div>
               <!-- Post categories-->
               <a class="badge bg-secondary text-decoration-none link-light">
                 <%= @park.park_type %>
               </a>
             </header>
-            <!-- Preview MAP figure-->
-            <figure class="mb-4">
-              <div id='map'></div>
-            </figure>
             <!-- Post content-->
+            <div class="images_box">
+            <% if @park.images.attached? %>
+              <% @park.images.each do |img| %>
+                <%= image_tag img, :size => '672x448' %>
+              <%end%>
+            <%end%>
+            </div>
           </article>
-
-          <section class="mb-5">
+          <!-- Comments section-->
+          <section class="mb-4">
             <div class="card bg-light">
               <div class="card-body">
                 <div class="d-flex mb-4">
                   <!-- Parent comment-->
-                    <% @park.reviews.each do |review| %>
-                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                  <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                     <div class="ms-3">
-                      <div class="fw-bold">投稿者:<%= review.member.account_name %>『<%= review.title %>』</div>
-                      <div class="text-muted fst-italic mb-2">Posted on
-                        <%= @park.created_at %>
-                        <% if @member == current_member %>
-                          <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %>
-                          <%#=link_to '編集', , class:"text-muted fst-italic mb-2"%>
-                        <% end %>
+                      <div class="fw-bold">
+                        <% if @park.reviews.size == 0 %>
+                          <p>まだレビュー投稿がありません。</p>
+                        <%end%>
+                        <% @park.reviews.each do |review| %>
+                          投稿者:<%= review.member.account_name %>『<%= review.title %>』
                       </div>
-                        <%= review.review_detail %>
-                   </div>
+                      <div class="text-muted fst-italic mb-2">
+                        Posted on <%= @park.created_at %>
+                          <% if @member == current_member || admin_signed_in? %>
+                            <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %>
+                            <%#=link_to '編集', , class:"text-muted fst-italic mb-2"%>
+                          <% end %>
+                      </div>
+                          <%= review.review_detail %>
+                        <%end%>
+                    </div>
                 </div>
-                    <%end%>
+
               </div>
             </div>
           </section>
@@ -105,6 +111,12 @@
               </div>
             </div>
           </div>
+            <!-- Preview MAP figure-->
+            <figure class="mb-4">
+              <div id='map'></div>
+            </figure>
+
+
         </div>
       </div>
     </div>

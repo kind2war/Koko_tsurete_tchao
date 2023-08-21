@@ -4,7 +4,7 @@ class Park < ApplicationRecord
   has_many :features, through: :park_feature_relations, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :members, through: :reviews
-  has_many_attached :image
+  has_many_attached :images
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
   #has_many :review_comments, dependent: :destroy

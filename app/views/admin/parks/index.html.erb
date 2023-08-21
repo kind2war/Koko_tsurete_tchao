@@ -1,5 +1,11 @@
 <div class="container">
-  <h2>公園一覧</h2>
+  <h2>新規登録</h2>
+</div>
+  <%= render 'admin/parks/form', parks: @parks %>
+
+
+<div class="container">
+<h2>公園一覧</h2>
   <div class="d-flex flex-row mb-6">
     <div class ="form-group  d-inline col-md-4">
       <%= search_form_for @q, url: search_parks_path do |f| %>
@@ -9,9 +15,6 @@
       <%end%>
     </div>
   </div>
-</div>
-  <%= render 'admin/parks/form', parks: @parks %>
-<div class="container">
   <table>
     <thead>
       <tr>

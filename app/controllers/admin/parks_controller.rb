@@ -16,6 +16,14 @@ class Admin::ParksController < ApplicationController
     end
   end
 
+  def show
+    @park = Park.find(params[:id])
+    @reviews = Review.all
+    @review = Review.new
+    @member = Member.all
+  end
+
+
   def edit
     @park = Park.find(params[:id])
   end
