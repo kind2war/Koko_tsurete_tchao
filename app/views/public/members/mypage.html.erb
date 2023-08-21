@@ -1,0 +1,57 @@
+<div class="container">
+	<div class="row d-flex">
+		<h3>マイページ</h3>
+		<div class="col-md-3">
+			<table class="border">
+				<tbody>
+					<tr>
+						<td>ユーザー名</td>
+						<td><%= @member.account_name %></td>
+					</tr>
+					<tr>
+						<td>メールアドレス</td>
+						<td><%= @member.email %></td>
+					</tr>
+					<tr>
+						<td>性別</td>
+						<td><%= @member.sex %></td>
+					</tr>
+					<tr>
+						<td>生年月日</td>
+						<td><%= @member.birth_date %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="col-md-9">
+			<h3>投稿レビュー</h3>
+			<div class="table-responsive">
+			<table class="table table-striped text-nowrap">
+				<thead>
+					<tr>
+						<th scope="col">公園</th>
+						<th scope="col">投稿日時</th>
+						<th scope="col">タイトル</th>
+						<th scope="col">レビュー内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @reviews.each do |review| %>
+					<tr>
+						<td><%= link_to review.park.park_name, park_path(review.park.id) %></td>
+						<td><%= review.created_at%></td>
+						<td><%= review.title %></td>
+						<td><%= review.review_detail%></td>
+					</tr>
+					<%end%>
+				</tbody>
+			</table>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
