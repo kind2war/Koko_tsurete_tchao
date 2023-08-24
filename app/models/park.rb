@@ -9,7 +9,6 @@ class Park < ApplicationRecord
   after_validation :geocode, if: :address_changed?
   #has_many :review_comments, dependent: :destroy
 
-
   def self.import(file)
     CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
       park = find_by(id: row["id"]) || new

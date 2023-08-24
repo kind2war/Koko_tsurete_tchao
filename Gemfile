@@ -70,3 +70,4 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+gem 'seed-fu', '~> 2.3'

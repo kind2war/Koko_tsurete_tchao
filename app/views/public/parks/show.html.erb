@@ -11,7 +11,7 @@
 
     <div class="container mt-5">
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-8">
           <!-- Post content-->
           <article>
             <!-- Post header-->
@@ -32,15 +32,17 @@
             <!-- Post content-->
             <div class="images_box">
             <% if @park.images.attached? %>
-              <% @park.images.each do |img| %>
-                <%= image_tag img, :size => '672x448' %>
+              <% @park.images.each do |park_image| %>
+                <%= image_tag park_image, size: '640x480' %>
               <%end%>
+            <%else%>
+              <%= image_tag 'https://placehold.jp/640x480.png', size: '640x480' %>
             <%end%>
             </div>
           </article>
           <!-- Comments section-->
-          <section class="col-lg-4">
-            <div class="card bg-light"style="width: 65rem;">
+          <section class="col-4">
+            <div class="card bg-light"style="width: 64rem;">
               <div class="card-body">
                 <div class="d-flex mb-4">
                   <!-- Parent comment-->
@@ -74,7 +76,7 @@
         </div>
 
         <!-- Side widgets-->
-        <div class="col-lg-4">
+        <div class="col-4">
           <!-- Search widget-->
           <div class="card mb-4">
             <div class="card-header">Search</div>
@@ -147,3 +149,6 @@
             });
           }
         </script>
+
+    <!-- Google maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>

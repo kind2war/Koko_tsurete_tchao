@@ -11,7 +11,7 @@
 
     <div class="container mt-5">
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-8">
           <!-- Post content-->
           <article>
             <!-- Post header-->
@@ -32,35 +32,40 @@
             <!-- Post content-->
             <div class="images_box">
             <% if @park.images.attached? %>
-              <% @park.images.each do |img| %>
-                <%= image_tag img, :size => '672x448' %>
+              <% @park.images.each do |park_image| %>
+                <%= image_tag park_image, size: '640x480' %>
               <%end%>
+            <%else%>
+              <%= image_tag 'https://placehold.jp/640x480.png', size: '640x480' %>
             <%end%>
             </div>
           </article>
           <!-- Comments section-->
-          <section class="mb-4">
-            <div class="card bg-light">
+          <section class="col-4">
+            <div class="card bg-light"style="width: 64rem;">
               <div class="card-body">
                 <div class="d-flex mb-4">
                   <!-- Parent comment-->
                   <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                     <div class="ms-3">
-                      <div class="fw-bold">
+                      <h5 class="card-title">
                         <% if @park.reviews.size == 0 %>
-                          <p>まだレビュー投稿がありません。</p>
+                          まだレビュー投稿がありません。
                         <%end%>
                         <% @park.reviews.each do |review| %>
-                          投稿者:<%= review.member.account_name %>『<%= review.title %>』
-                      </div>
-                      <div class="text-muted fst-italic mb-2">
+                          『<%= review.title %>』
+                      </h5>
+                      <h6 class="card-subtitle mb-2 text-muted">
                         Posted on <%= @park.created_at %>
+                        <b>投稿者:<%= review.member.account_name %></b>
                           <% if @member == current_member || admin_signed_in? %>
-                            <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' } %>
-                            <%#=link_to '編集', , class:"text-muted fst-italic mb-2"%>
+                            <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' },class:"card-link" %>
+                            <%#=link_to '編集', , class:"card-link"%>
                           <% end %>
-                      </div>
-                          <%= review.review_detail %>
+                      </h6>
+                      <p class="card-text">
+                        <%= review.review_detail %>
+                      </p>
                         <%end%>
                     </div>
                 </div>
@@ -71,7 +76,7 @@
         </div>
 
         <!-- Side widgets-->
-        <div class="col-lg-4">
+        <div class="col-4">
           <!-- Search widget-->
           <div class="card mb-4">
             <div class="card-header">Search</div>
@@ -115,8 +120,6 @@
             <figure class="mb-4">
               <div id='map'></div>
             </figure>
-
-
         </div>
       </div>
     </div>
@@ -146,3 +149,6 @@
             });
           }
         </script>
+        
+    <!-- Google maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>

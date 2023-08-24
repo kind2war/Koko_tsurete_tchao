@@ -1,4 +1,6 @@
 <div class="container">
+  <div class="card bg-light">
+    <h3>新規登録</h3>
   <div class="form-group d-flex flex-row">
     <div class="col-md-3">
       <%= form_with model: @park,url: admin_parks_path, local: true do |f| %>
@@ -33,5 +35,6 @@
       <% end %>
     </div>
   </div>
+</div>
 </div>
 
