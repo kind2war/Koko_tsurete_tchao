@@ -23,7 +23,7 @@
               <!-- Post meta content-->
               <div class="text-muted fst-italic mb-2">Posted on
                 <%= @park.created_at %> by admin
-                <%=link_to '編集する', edit_admin_park_path(@park), class:"text-muted fst-italic mb-2"%></div>
+                <%=link_to '編集する', edit_admin_park_path(@park), class:"text-muted fst-italic mb-2", data: {"turbolinks"=>false}%></div>
               <!-- Post categories-->
               <a class="badge bg-secondary text-decoration-none link-light">
                 <%= @park.park_type %>
@@ -149,6 +149,6 @@
             });
           }
         </script>
-        
+
     <!-- Google maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>

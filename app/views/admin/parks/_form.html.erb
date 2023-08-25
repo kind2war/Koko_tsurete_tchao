@@ -3,38 +3,41 @@
     <h3>新規登録</h3>
   <div class="form-group d-flex flex-row">
     <div class="col-md-3">
-      <%= form_with model: @park,url: admin_parks_path, local: true do |f| %>
-        <%= f.label :park_name, '◆登録　＊名称 '%>
+      <%= form_with model: @park, url: admin_parks_path, local: true do |f| %>
+        <%= f.label :park_name, '＊名称（必須）'%>
         <%= f.text_field :park_name, class:"form-control" %>
     </div>
       <div class="col-md-3">
-        <%= f.label :address,'＊所在地' %>
+        <%= f.label :address,'＊所在地（必須）' %>
         <%= f.text_field :address, class:"form-control" %>
       </div>
+        <div class="col-md-3">
+          <%= f.label :park_type,'＊分類' %>
+          <%= f.text_field :park_type, class:"form-control" %>
+        </div>
   </div>
+
   <div class="form-group d-flex flex-row">
     <div class="col-md-1">
-      <div class="p-2"><%= f.label :feature_ids, '＊タグ' %></div>
+      <div class="p-2"><%= f.label :feature_id, '＊タグ' %></div>
     </div>
-    <div class="form-check form-check-inline border d-flex flex-row flex-warp">
-      <%= f.collection_check_boxes(:feature_ids, Feature.all, :id, :feature_detail) do |tag| %>
-        <%= tag.label class: 'form-check-label' do %>
-          <div class="mx-4 mt-2">
-          <%= tag.check_box class: 'form-check-input' %>
-          <%= tag.label %>
-          </div>
+      <div class="form-check form-check-inline border d-flex flex-row flex-warp">
+        <%= f.collection_check_boxes(:feature_ids, Feature.all, :id, :feature_detail) do |tag| %>
+          <%= tag.label class: 'form-check-label' do %>
+            <div class="mx-4 mt-2">
+            <%= tag.check_box class: 'form-check-input' %>
+            <%= tag.label %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-      <div class="images_form">
-        <%= f.file_field :images, direct_upload: true, multiple: true  %>
+        <%= link_to '編集', admin_features_path %>
       </div>
-
-    <div class="col-md-2">
-      <%= f.submit class:"btn-primary btn-sm"%>
+        <div class="images_form">
+          <%= f.file_field :images, direct_upload: true, multiple: true  %>
+        </div>
+          <%= f.submit class:"btn btn-primary btn-sm"%>
       <% end %>
-    </div>
   </div>
-</div>
+  </div>
 </div>
 

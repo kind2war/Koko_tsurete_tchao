@@ -12,7 +12,7 @@ class Admin::ParksController < ApplicationController
       redirect_to admin_park_path(@park)
     else
       @parks = Park.all
-      render admin_parks_path
+      redirect_to admin_parks_path
     end
   end
 
@@ -23,16 +23,20 @@ class Admin::ParksController < ApplicationController
     @member = Member.all
   end
 
-
   def edit
     @park = Park.find(params[:id])
   end
 
   def update
     @park = Park.find(params[:id]).update(park_params)
-    redirect_to admin_parks_path
+    redirect_to admin_park_path(params[:id])
   end
 
+  def destroy
+    Park.find(params[:id]).destroy
+    redirect_to admin_parks_path
+  end
+  
   def index
     @park = Park.new
     @parks = @q.result

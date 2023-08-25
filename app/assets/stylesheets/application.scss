@@ -3,8 +3,31 @@
 @import "styles";
 @import "public/parks";
 @import "public/registration";
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Zen+Maru+Gothic:wght@500&display=swap');
 
 .images_box {
   width: auto;
   height: 50;
+}
+
+.convertingColorsLinearGradient{
+  background-image: linear-gradient(-180deg, rgba(96, 191, 207, 1) 15%, rgba(125, 219, 235, 1) 30%, rgba(154, 248, 255, 1) 45%, rgba(184, 255, 255, 1) 55%, rgba(213, 255, 255, 1) 70%, rgba(243, 255, 255, 1) 85%, rgba(255, 255, 255, 1) 100%);
+}
+
+.convertingColorsTextShadow{
+  text-shadow: rgba(232, 250, 253, 1) 1px 1px 0px, rgba(117, 194, 207, 1) 2px 2px 0px, rgba(137, 197, 207, 1) 3px 3px 0px, rgba(158, 200, 207, 1) 4px 4px 0px, rgba(179, 203, 207, 1) 5px 5px 0px, rgba(200, 206, 207, 1) 6px 6px 0px, rgba(220, 209, 207, 1) 7px 7px 0px, rgba(241, 212, 207, 1) 8px 8px 0px, rgba(255, 215, 207, 1) 9px 9px 0px, rgba(255, 218, 207, 1) 10px 10px 0px;color: rgba(232, 250, 253, 1);
+  font-family: 'Cherry Bomb One','Zen Maru Gothic', sans-serif;
+}
+
+.about{
+  font-size: 2rem;
+}
+
+.images_box{
+  max-width: 640px;
+  min-width: 240px;
+}
+
+.imag-box img{
+  width: 100%;
 }
