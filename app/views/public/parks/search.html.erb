@@ -2,7 +2,7 @@
   <h2>「<%= params[:q][:park_name_or_address_or_park_type_cont] if params[:q].present? %>」の検索結果（<%= @results.size %>件）</h2>
 
 <% if @results.present? %>
-  <table>
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th><%= sort_link(@q, :id, "NO.") %></th>

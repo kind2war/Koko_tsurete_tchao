@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       #resources :review_comments, only: [:create, :destroy]
     end
     resources :members, only: :index
-      get '/mypage', to: 'members#show', as: 'mypage'
+      get '/mypage', to: 'members#mypage', as: 'mypage'
   end
 
 end

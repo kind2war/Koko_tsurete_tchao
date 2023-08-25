@@ -64,10 +64,10 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'ransack'
 gem 'geocoder'
 gem 'dotenv-rails'
-gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+gem 'seed-fu', '~> 2.3'

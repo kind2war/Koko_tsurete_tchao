@@ -9,6 +9,10 @@
         <%= f.label :address,'＊所在地' %>
         <%= f.text_field :address, class:"form-control" %>
       </div>
+        <div class="col-md-3">
+          <%= f.label :park_type,'＊分類' %>
+          <%= f.text_field :park_type, class:"form-control" %>
+        </div>
   </div>
   <div class="form-group d-flex flex-row">
     <div class="col-md-1">
@@ -24,9 +28,13 @@
         <% end %>
       <% end %>
     </div>
+      <div class="images_form">
+        <%= f.file_field :images, direct_upload: true, multiple: true %>
+      </div>
     <div class="col-md-2">
-      <%= f.submit class:"btn btn-primary btn-sm"%>
+      <%= f.submit class:"btn-primary btn-sm", data: {"turbolinks"=>false}%>
       <% end %>
+      <%= button_to "削除", admin_park_path(@park.id),  class:"btn-danger btn-sm", method: :delete, data: {confirm: "削除しますか？"} %>
     </div>
   </div>
 </div>

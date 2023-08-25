@@ -1,1 +1,56 @@
-<h1>TOP view</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+			<table border="1" class="table">
+				<thead>
+					<tr>
+						<th colspan ="2" class="table-secondary" >新着レビュー</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<% @reviews.each.with_index(1) do |review, i|%>
+						<td><%= i %></td>
+						<td>『<%= review.title %>』by <%= review.member.account_name %></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><%= review.review_detail %></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><%= review.park.park_name %></td>
+					</tr>
+					<%end%>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+<!--Top紹介文-->
+	<!--おすすめ公園-->
+<div class="row">
+	<div class="col-lg-3 offset-2"><h3>おすすめの公園</h3></div>
+</div>
+  <div class="container-fluid">
+    <div class="row offset-1">
+      <div id="new-item">
+    		<% @parks.each.with_index(1) do |park, i| %>
+					<% if park.images.attached? %>
+						<div class="col-md-2 offset-1">
+							<%= link_to image_tag park, size:'160x120'%>
+							<%= i %>
+							<% link_to park.park_name, park %>
+						</div>
+					<%else%>
+						<div class="col-md-2 offset-1">
+							<%= image_tag 'https://placehold.jp/640x480.png', size: '160x120' %>
+							<%= i %>
+							<%= link_to park.park_name, park %>
+						</div>
+					<%end%>
+	    	<%end%>
+      </div>
+    </div>
+  </div>
+</div>
