@@ -1,4 +1,3 @@
-<!-- Page content-->
 <% if @review.errors.any? %>
   <div class="alert">
     <ul>
@@ -8,147 +7,131 @@
     </ul>
   </div>
   <% end %>
-
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-8">
-          <!-- Post content-->
-          <article>
-            <!-- Post header-->
-            <header class="mb-4">
-              <!-- Post title-->
-              <h1 class="fw-bolder mb-1">
-                <%= @park.park_name %>
-              </h1>
-              <!-- Post meta content-->
-              <div class="text-muted fst-italic mb-2">Posted on
-                <%= @park.created_at %> by admin
-                <%=link_to '編集する', edit_admin_park_path(@park), class:"text-muted fst-italic mb-2", data: {"turbolinks"=>false}%></div>
-              <!-- Post categories-->
-              <a class="badge bg-secondary text-decoration-none link-light">
-                <%= @park.park_type %>
-              </a>
-            </header>
-            <!-- Post content-->
-            <div class="images_box">
-            <% if @park.images.attached? %>
-              <% @park.images.each do |park_image| %>
-                <%= image_tag park_image, size: '640x480' %>
-              <%end%>
-            <%else%>
-              <%= image_tag 'https://placehold.jp/640x480.png', size: '640x480' %>
+<!-- Page content-->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 col-md-8">
+    <!-- Post content-->
+      <article>
+      <!-- Post header-->
+        <header class="mb-4">
+        <!-- Post title-->
+          <h1 class="fw-bolder mb-1"><%= @park.park_name %></h1>
+          <!-- Post meta content-->
+          <div class="text-muted fst-italic mb-2">Posted on
+            <%= @park.created_at %> by admin
+            <%=link_to '編集する', edit_admin_park_path(@park), class:"text-muted fst-italic mb-2", data: {"turbolinks"=>false}%>
+          </div>
+        <!-- Post categories-->
+          <a class="badge bg-secondary text-decoration-none link-light"><%= @park.park_type %></a>
+        </header>
+      <!-- Post content-->
+        <div class="images_box">
+          <% if @park.images.attached? %>
+            <% @park.images.each do |park_image| %>
+              <%= image_tag park_image, size: '640x480' %>
             <%end%>
-            </div>
-          </article>
-          <!-- Comments section-->
-          <section class="col-4">
-            <div class="card bg-light"style="width: 64rem;">
-              <div class="card-body">
-                <div class="d-flex mb-4">
-                  <!-- Parent comment-->
-                  <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                    <div class="ms-3">
-                      <h5 class="card-title">
-                        <% if @park.reviews.size == 0 %>
-                          まだレビュー投稿がありません。
-                        <%end%>
-                        <% @park.reviews.each do |review| %>
-                          『<%= review.title %>』
-                      </h5>
-                      <h6 class="card-subtitle mb-2 text-muted">
-                        Posted on <%= @park.created_at %>
-                        <b>投稿者:<%= review.member.account_name %></b>
-                          <% if @member == current_member || admin_signed_in? %>
-                            <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' },class:"card-link" %>
-                            <%#=link_to '編集', , class:"card-link"%>
-                          <% end %>
-                      </h6>
-                      <p class="card-text">
-                        <%= review.review_detail %>
-                      </p>
-                        <%end%>
-                    </div>
-                </div>
-
-              </div>
-            </div>
-          </section>
+          <%else%>
+            <%= image_tag 'https://placehold.jp/640x480.png', size: '640x480' %>
+          <%end%>
         </div>
+      </article>
 
-        <!-- Side widgets-->
-        <div class="col-4">
-          <!-- Search widget-->
-          <div class="card mb-4">
-            <div class="card-header">Search</div>
+    <!-- Comments section-->
+      <div class="card bg-light w-100 p-3">
+        <div class="card-body">
+          <div class="d-flex mb-4">
+        <!-- Parent Reviews-->
+          <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+            <div class="ms-3">
+              <h5 class="card-title">
+                <% @park.reviews.each do |review| %>
+                  『<%= review.title %>』
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                Posted on <%= @park.created_at %>
+                <b>投稿者:<%= review.member.account_name %></b>
+                  <% if @member == current_member || admin_signed_in? %>
+                    <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' },class:"card-link" %>
+                    <%#=link_to '編集', , class:"card-link"%>
+                  <% end %>
+              </h6>
+              <p class="card-text"><%= review.review_detail %></p>
+                <%end%>
+                <% if @park.reviews.size == 0 %>
+                  <p>まだレビュー投稿がありません。</p>
+                <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Side widgets-->
+    <div class="cil-12 col-md-4">
+      <!-- Search widget-->
+        <div class="card mb-4">
+          <div class="card-header">Search</div>
             <div class="card-body">
               <div class="input-group">
                 <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search"/>
                 <button class="btn btn-primary" id="button-search" type="button">Go!</button>
               </div>
             </div>
-          </div>
-          <!-- Categories widget-->
+        </div>
+        <!-- features widget-->
           <div class="card mb-4">
             <div class="card-header">特徴・特色</div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-6">
+              <div class="card-body">
+                <div class="col-md-6">
                   <% @park.features.each do |tag| %>
                     <ul class="badge bg-secondary text-decoration-none link-light">
                       <li>
                         <a href="#!" style="color:#F5F5F5"><%= tag.feature_detail %></a>
                       </li>
                     </ul>
-                    <%end%>
+                  <%end%>
                 </div>
               </div>
-            </div>
           </div>
-          <!-- Side widget-->
-          <div class="card mb-4">
-            <div class="card-header">レビュー投稿</div>
-            <div class="card bg-light">
-              <div class="card-body">
-                <!-- Comment form-->
-                <div class="mb-4">
-                  <%= render "public/reviews/form.html.erb", {park: @park, review: @review } %>
-                </div>
+            <!-- post reviwes form -->
+              <div class="card bg-light mb-4">
+                <div class="card-header">レビュー投稿</div>
+                  <div class="card-body">
+                    <%= render "public/reviews/form.html.erb", {park: @park, review: @review } %>
+                  </div>
               </div>
-            </div>
-          </div>
-            <!-- Preview MAP figure-->
-            <figure class="mb-4">
-              <div id='map'></div>
-            </figure>
-        </div>
-      </div>
+                <!-- Preview MAP figure-->
+                  <figure class="mb-4">
+                    <div id='map'></div>
+                  </figure>
     </div>
+  </div>
+</div>
+    <script type="text/javascript">
+      function initMap() {
+        var test ={lat: <%= @park.latitude %>, lng: <%= @park.longitude %>};
+        var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 17,
+                  center: test
+                  });
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
 
-        <script type="text/javascript">
-          function initMap() {
-            var test ={lat: <%= @park.latitude %>, lng: <%= @park.longitude %>};
-            var map = new google.maps.Map(document.getElementById('map'), {
-                      zoom: 17,
-                      center: test
-                      });
-            var transitLayer = new google.maps.TransitLayer();
-            transitLayer.setMap(map);
+        var contentString = '住所：<%= @park.address %>';
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        var marker = new google.maps.Marker({
+                      position:test,
+                      map: map,
+                      title: contentString
+                    });
 
-            var contentString = '住所：<%= @park.address %>';
-            var infowindow = new google.maps.InfoWindow({
-              content: contentString
-            });
-            var marker = new google.maps.Marker({
-                          position:test,
-                          map: map,
-                          title: contentString
-                        });
-
-            marker.addListener('click', function() {
-              infowindow.open(map, marker);
-            });
-          }
-        </script>
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+    </script>
 
     <!-- Google maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>

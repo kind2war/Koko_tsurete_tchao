@@ -9,7 +9,7 @@ class Admin::ParksController < ApplicationController
   def create
     @park = Park.create(park_params)
     if @park.save
-      redirect_to admin_park_path(@park)
+      redirect_to park_path(@park)
     else
       @parks = Park.all
       redirect_to admin_parks_path
@@ -29,14 +29,14 @@ class Admin::ParksController < ApplicationController
 
   def update
     @park = Park.find(params[:id]).update(park_params)
-    redirect_to admin_park_path(params[:id])
+    redirect_to park_path(params[:id])
   end
 
   def destroy
     Park.find(params[:id]).destroy
     redirect_to admin_parks_path
   end
-  
+
   def index
     @park = Park.new
     @parks = @q.result
@@ -48,7 +48,7 @@ class Admin::ParksController < ApplicationController
 
   def import
     Park.import(params[:file])
-    redirect_to admin_parks_path
+    redirect_to parks_path
   end
 
 private
@@ -57,7 +57,7 @@ private
   end
 
   def park_params
-    params.require(:park).permit(:park_name, :address,:park_type, :latitude, :longitude,  feature_ids: [], images:[])
+    params.require(:park).permit(:park_name, :address,:park_type, :latitude, :longitude, :area, :size, :size_rank,  feature_ids: [], images:[])
   end
 
 end

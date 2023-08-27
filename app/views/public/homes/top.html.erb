@@ -38,9 +38,9 @@
     		<% @parks.each.with_index(1) do |park, i| %>
 					<% if park.images.attached? %>
 						<div class="col-md-2 offset-1">
-							<%= link_to image_tag park, size:'160x120'%>
+							<%= link_to image_tag(park.images.first, size:'160x120'), park %>
 							<%= i %>
-							<% link_to park.park_name, park %>
+							<%= link_to park.park_name, park %>
 						</div>
 					<%else%>
 						<div class="col-md-2 offset-1">

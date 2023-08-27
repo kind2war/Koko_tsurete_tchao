@@ -9,6 +9,9 @@ require 'csv'
   	park_type = row[3]
   	latitude = row[4]
   	longitude = row[5]
+  	area = row[6]
+  	size = row[7]
+  	size_rank = row[8]
 
 	Park.seed(:id) do |s|
 		s.id = id
@@ -17,6 +20,9 @@ require 'csv'
 		s.park_type = park_type
 		s.latitude = latitude
 		s.longitude = longitude
+		s.area = area
+		s.size = size
+		s.size_rank = size_rank
 	end
 end
 

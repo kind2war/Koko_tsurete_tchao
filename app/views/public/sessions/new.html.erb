@@ -12,14 +12,14 @@
     <div class="col-sm-2">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= render "public/shared/error_messages", resource: resource %>
-      <%= f.label :メールアドレス, class: "col-form-label" %></div>
+      <%= f.label :email,"メールアドレス", class: "col-form-label" %></div>
     <div class="col-sm-4">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class:"form-control form-control-sm"%>
     </div>
   </div>
   <div class="row justify-content-center">
     <div class="col-sm-2">
-      <%= f.label :パスワード, class: "col-form-label" %>
+      <%= f.label :password,"パスワード", class: "col-form-label" %>
     </div>
     <div class="col-sm-4">
       <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-sm" %>
@@ -44,7 +44,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-sm-6">
-      <p><%= render "public/shared/links" %>から新規登録を行ってください。</p></div>
+      <p><%= render "public/shared/links" %></p></div>
   </div>
 </div>
 <% end %>

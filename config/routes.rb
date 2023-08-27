@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   scope module: :admin do
-    get '/admin' => "homes#top", as: "admin"
+    get '/admin' => "parks#index", as: "admin_top"
   end
 
   devise_for :admin,  controllers: {
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :parks
+    resources :parks, only:[:index, :create, :destroy, :update, :edit]
     resources :features, only: [:index, :create, :destroy]
   end
 
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about', as: "about"
     resources :maps, only: [:index]
       get '/map_request', to: 'maps#map', as: 'map_request'
-    resources :parks, only: [:show, :index] do
+    resources :parks, only: [:show, :index, :update] do
       resources :reviews, only: [:create, :destroy]
       collection { post :import }
       collection do
