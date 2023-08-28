@@ -62,6 +62,7 @@ gem 'roo'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'ransack'
+gem 'gon'
 gem 'geocoder'
 gem 'dotenv-rails'
 group :production do

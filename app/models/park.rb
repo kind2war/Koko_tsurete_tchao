@@ -5,7 +5,7 @@ class Park < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :members, through: :reviews
   has_many_attached :images
-  validates :park_name, :address, presence: true
+  validates :park_name, :address, :latitude, :longitude, presence: true
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
   #has_many :review_comments, dependent: :destroy
@@ -42,4 +42,21 @@ class Park < ApplicationRecord
   def self.park_type_options
     PARK_TYPE.map{|type|[type,type]}
   end
+
+  AREA = [
+    '追浜エリア',
+    '田浦エリア',
+    '逸見エリア',
+    '市役所エリア	',
+    '大津エリア',
+    '衣笠エリア',
+    '浦賀エリア',
+    '西エリア',
+    '久里浜エリア',
+    '北下浦エリア'
+    ]
+  def self.area_options
+    AREA.map{|type|[type,type]}
+  end
+
 end

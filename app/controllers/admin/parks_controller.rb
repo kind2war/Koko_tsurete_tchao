@@ -7,7 +7,7 @@ class Admin::ParksController < ApplicationController
   end
 
   def create
-    @park = Park.create(park_params)
+    @park = Park.new(park_params)
     if @park.save
       redirect_to park_path(@park)
     else

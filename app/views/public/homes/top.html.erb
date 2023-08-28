@@ -1,16 +1,16 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-2">
-			<table border="1" class="table">
+		<div class="col-md-3">
+			<table class="table">
 				<thead>
 					<tr>
-						<th colspan ="2" class="table-secondary" >新着レビュー</th>
+						<th colspan ="2" class="table border-primary" >新着レビュー</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<% @reviews.each.with_index(1) do |review, i|%>
-						<td><%= i %></td>
+						<td>#<%= i %></td>
 						<td>『<%= review.title %>』by <%= review.member.account_name %></td>
 					</tr>
 					<tr>
@@ -19,7 +19,11 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><%= review.park.park_name %></td>
+						<td>@<%= review.park.park_name %></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><%= review.park.created_at %></td>
 					</tr>
 					<%end%>
 				</tbody>

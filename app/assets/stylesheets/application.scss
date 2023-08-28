@@ -1,14 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "styles";
-@import "public/parks";
 @import "public/registration";
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Zen+Maru+Gothic:wght@500&display=swap');
-
-.images_box {
-  width: auto;
-  height: 50;
-}
+@import "slick-theme";
+@import "slick";
 
 .convertingColorsLinearGradient{
   background-image: linear-gradient(-180deg, rgba(96, 191, 207, 1) 15%, rgba(125, 219, 235, 1) 30%, rgba(154, 248, 255, 1) 45%, rgba(184, 255, 255, 1) 55%, rgba(213, 255, 255, 1) 70%, rgba(243, 255, 255, 1) 85%, rgba(255, 255, 255, 1) 100%);
@@ -23,7 +19,7 @@
   font-size: 2rem;
 }
 
-.images_box{
+.images_box {
   max-width: 640px;
   min-width: 240px;
 }
@@ -31,3 +27,8 @@
 .images_box img{
   width: 100%;
 }
+
+#map {
+  height: 400px;
+}
+

@@ -1,27 +1,28 @@
 <div class="container">
 	<div class="row d-flex">
-		<h3>マイページ</h3>
+		<h3></i>マイページ</h3>
 		<div class="col-md-3">
 			<table class="border">
 				<tbody>
 					<tr>
-						<td>ユーザー名</td>
+						<td><i class="fas fa-user"></i>ユーザー名</td>
 						<td><%= @member.account_name %></td>
 					</tr>
 					<tr>
-						<td>メールアドレス</td>
+						<td><i class="fas fa-envelope"></i>メールアドレス</td>
 						<td><%= @member.email %></td>
 					</tr>
 					<tr>
-						<td>性別</td>
+						<td><i class="fas fa-venus"></i><i class="fas fa-mars"></i>性別</td>
 						<td><%= @member.sex %></td>
 					</tr>
 					<tr>
-						<td>生年月日</td>
+						<td><i class="fas fa-birthday-cake"></i>生年月日</td>
 						<td><%= @member.birth_date %></td>
 					</tr>
 				</tbody>
 			</table>
+			<%= link_to '編集する', edit_member_registration_path %>
 		</div>
 
 		<div class="col-md-9">

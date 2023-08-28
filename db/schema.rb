@@ -96,10 +96,6 @@ ActiveRecord::Schema.define(version: 2023_08_26_215143) do
     t.string "account_name", default: "", null: false
     t.date "birth_date", default: "1991-01-01", null: false
     t.integer "sex", default: 0, null: false
-    t.integer "spouse", default: 0, null: false
-    t.integer "children", default: 0, null: false
-    t.integer "prefecture_id"
-    t.integer "city_id"
     t.boolean "is_deleted", default: false, null: false
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true

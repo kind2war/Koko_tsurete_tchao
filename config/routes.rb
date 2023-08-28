@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   scope module: :admin do
     get '/admin' => "parks#index", as: "admin_top"
+    post '/parks', to: 'parks#create'
   end
 
   devise_for :admin,  controllers: {
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :parks, only:[:index, :create, :destroy, :update, :edit]
+    resources :parks, only:[:index, :destroy, :update, :edit]
     resources :features, only: [:index, :create, :destroy]
   end
 

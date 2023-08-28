@@ -1,49 +1,77 @@
-<h2>Edit
-  <%= resource_name.to_s.humanize %>
-</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-    <div class="field">
-      <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container px-4">
+<% flash.each do |message_type, message| %>
+  <%= content_tag :div, message, class: "alert alert-danger" %>
+<% end %>
+<h3>編集</h3>
+<%= render "public/shared/error_messages", resource: resource %>
+  <div class="row justify-content-center">
+    <div class="col-sm-2">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.label :メールアドレス, class:"col-form-label" %>
     </div>
+    <div class="col-sm-4">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+    </div>
+  </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for:
-        <%= resource.unconfirmed_email %>
-      </div>
-      <% end %>
+  <div class="row justify-content-center">
+    <div class="col-md-2">
+      <%= f.label :パスワード ,class:"col-form-label"%>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %><br />
+    </div>
+    <div class="col-sm-4">
+      <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+    </div>
+  </div>
 
-        <div class="field">
-          <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-            <%= f.password_field :password, autocomplete: "new-password" %>
-              <% if @minimum_password_length %>
-                <br />
-                <em><%= @minimum_password_length %> characters minimum</em>
-                <% end %>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-sm-2">
+      <%= f.label :入力確認,class:"col-form-label" %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password",class:"form-control" %>
+    </div>
+  </div>
 
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-        </div>
+  <div class="sex_field row justify-content-center">
+    <div class="col-sm-2">
+      <%= f.label :性別, class:"form-check-label" %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.label :男性, class:"form-check-label"  %>
+        <%= f.radio_button :sex, :man,   class:"form-check-input", disabled: true %>
+      <%= f.label :女性, class:"form-check-label" %>
+        <%= f.radio_button :sex, :woman, class:"form-check-input", disabled: true %>
+    </div>
+  </div>
 
-        <div class="field">
-          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-            <%= f.password_field :current_password, autocomplete: "current-password" %>
-        </div>
+  <div class="date_select row justify-content-center">
+    <div class="col-sm-2">
+      <%= f.label :生年月日,class:"col-form-label" %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.date_select :birth_date, use_month_numbers: true,
+      start_year: 1930,
+      end_year: (Time.now.year - 16),
+      default: Date.new(1991, 1, 1) ,disabled: true%>
+    </div>
+  </div>
 
-        <div class="actions">
-          <%= f.submit "Update" %>
-        </div>
-        <% end %>
+  <div class="account_name row justify-content-center">
+    <div class="col-sm-2">
+      <%= f.label :アカウント名,class:"col-form-label" %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.text_field :account_name , class:"form-control"%>
+        <BR>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-sm-4">
+        <button type="subimit" class="btn btn-success btn-sm">更新する</div>
+    </div>
+  </div>
+  <% end %>
+</div>
 
-          <h3>Cancel my account</h3>
-
-          <div>Unhappy?
-            <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
-          </div>
-
-          <%= link_to "Back", :back %>
