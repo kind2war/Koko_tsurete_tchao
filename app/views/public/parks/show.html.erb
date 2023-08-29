@@ -60,13 +60,12 @@
                    『<%= review.title %>』
                   </h5>
                   <h6 class="card-subtitle mb-2 text-muted">
-                    <%= review.review_detail %>
                       Posted on <%= review.created_at %>
                   <b>投稿者:<%= review.member.account_name %></b>
                       <% if @member == current_member || admin_signed_in? %>
-                        <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' },class:"card-link" %>
-                        <%#=link_to '編集', , class:"card-link"%>
+                        <%= link_to '削除', park_review_path(review.park, review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' },class:"card-link" %>
                       <% end %></h6>
+                      <%= review.review_detail %>
                 <%end%>
                 <% if @park.reviews.size == 0 %>
                   <p>まだレビュー投稿がありません。</p>
