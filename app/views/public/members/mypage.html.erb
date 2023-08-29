@@ -22,7 +22,9 @@
 					</tr>
 				</tbody>
 			</table>
+			<% unless @member.guest_member? %>
 			<%= link_to '編集する', edit_member_registration_path %>
+			<%end%>
 		</div>
 
 		<div class="col-md-9">
@@ -53,6 +55,3 @@
 
 	</div>
 </div>
-
-
-

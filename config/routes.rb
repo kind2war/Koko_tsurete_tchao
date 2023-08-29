@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   devise_scope :member do
     get '/members/sign_out' => 'devise/sessions#destroy'
+    post "/members/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
 
   scope module: :public do
