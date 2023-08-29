@@ -23,7 +23,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><%= review.park.created_at %></td>
+						<td><%= review.park.created_at.strftime("%Y-%m-%d %H:%M") %></td>
 					</tr>
 					<%end%>
 				</tbody>

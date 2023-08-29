@@ -10,9 +10,7 @@ before_action :authenticate_member!
   end
 
   def destroy
-    review = Review.find(params[:id])
-    
-    review.destroy
+    Review.find(params[:id]).destroy
     redirect_to park_path(params[:park_id])
   end
 
