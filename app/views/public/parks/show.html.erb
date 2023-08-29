@@ -77,42 +77,32 @@
       </div>
     <!-- Side widgets-->
       <div class="col-12 col-md-4">
-        <!-- Search widget-->
+        <!-- features widget-->
           <div class="card mb-4">
-            <div class="card-header">Search</div>
+            <div class="card-header">特徴・特色</div>
               <div class="card-body">
-                <div class="input-group">
-                  <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search"/>
-                  <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                <div class="col-md-6">
+                  <% @park.features.each do |tag| %>
+                    <ul class="badge bg-secondary text-decoration-none link-light">
+                      <li>
+                        <P><%= tag.feature_detail %></P>
+                      </li>
+                    </ul>
+                  <%end%>
                 </div>
               </div>
           </div>
-          <!-- features widget-->
-            <div class="card mb-4">
-              <div class="card-header">特徴・特色</div>
-                <div class="card-body">
-                  <div class="col-md-6">
-                    <% @park.features.each do |tag| %>
-                      <ul class="badge bg-secondary text-decoration-none link-light">
-                        <li>
-                          <P><%= tag.feature_detail %></P>
-                        </li>
-                      </ul>
-                    <%end%>
+            <!-- post reviwes form -->
+              <div class="card bg-light mb-4">
+                <div class="card-header">レビュー投稿</div>
+                  <div class="card-body review">
+                    <%= render "public/reviews/form.html.erb", {park: @park, review: @review } %>
                   </div>
-                </div>
-            </div>
-              <!-- post reviwes form -->
-                <div class="card bg-light mb-4">
-                  <div class="card-header">レビュー投稿</div>
-                    <div class="card-body review">
-                      <%= render "public/reviews/form.html.erb", {park: @park, review: @review } %>
-                    </div>
-                </div>
-                  <!-- Preview MAP figure-->
-                    <figure class="mb-4">
-                      <div id='map'></div>
-                    </figure>
+              </div>
+                <!-- Preview MAP figure-->
+                  <figure class="mb-4">
+                    <div id='map'></div>
+                  </figure>
       </div>
     </div>
   </div>
