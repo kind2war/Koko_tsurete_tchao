@@ -40,7 +40,7 @@ class Park < ApplicationRecord
     'その他'
     ]
   def self.park_type_options
-    PARK_TYPE.map{|type|[type,type]}
+    PARK_TYPE.select {|type|[type,type]}
   end
 
   AREA = [

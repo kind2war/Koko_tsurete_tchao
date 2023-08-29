@@ -7,16 +7,15 @@
         <article>
         <!-- Post header-->
           <header class="mb-4">
-          <!-- Post title-->
             <h1 class="fw-bolder mb-1"> <%= @park.park_name %> </h1>
-            <!-- Post meta content-->
             <div class="text-muted fst-italic mb-2">Posted on
               <%= @park.created_at %> by admin
               <%=link_to '編集する', edit_admin_park_path(@park), class:"text-muted fst-italic mb-2", data: {"turbolinks"=>false}%>
             </div>
             <!-- Post categories-->
-            <a class="badge bg-secondary text-decoration-none link-light"><%= @park.park_type %></a>
+            <a class="badge bg-info text-decoration-none link-light"><%= @park.park_type %></a>
           </header>
+
         <!-- Post content-->
           <div class="images_box">
             <% if @park.images.attached? %>
@@ -29,6 +28,26 @@
           </div>
         </article>
 
+        <!-- table -->
+        <div class="col-12 col-md-11">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>所在地</th>
+                <th>エリア</th>
+                <th>面積（㎡）</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td><%= @park.address %></td>
+                  <td><%= @park.area %></td>
+                  <td><%= @park.size %></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+
       <!-- Comments section-->
         <div class="card bg-light p-3 col-12 col-md-10">
           <div class="card-body">
@@ -36,23 +55,22 @@
           <!-- Parent Reviews-->
             <div class="flex-shrink-0"><i class="far fa-smile fa-spin fa-lg" style="color: #4a6aa1;"></i></div>
               <div class="ms-3">
-                <h5 class="card-title">
-                  <% @park.reviews.each do |review| %>
-                    『<%= review.title %>』
-                </h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  Posted on <%= @park.created_at %>
+                <% @park.reviews.each do |review| %>
+                  <h5 class="card-title">
+                   『<%= review.title %>』
+                  </h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    <%= review.review_detail %>
+                      Posted on <%= review.created_at %>
                   <b>投稿者:<%= review.member.account_name %></b>
-                    <% if @member == current_member || admin_signed_in? %>
-                      <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' },class:"card-link" %>
-                      <%#=link_to '編集', , class:"card-link"%>
-                    <% end %>
-                </h6>
-                <p class="card-text"><%= review.review_detail %></p>
-                  <%end%>
-                  <% if @park.reviews.size == 0 %>
-                    <p>まだレビュー投稿がありません。</p>
-                  <%end%>
+                      <% if @member == current_member || admin_signed_in? %>
+                        <%= link_to '削除', park_review_path(review.park,review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' },class:"card-link" %>
+                        <%#=link_to '編集', , class:"card-link"%>
+                      <% end %></h6>
+                <%end%>
+                <% if @park.reviews.size == 0 %>
+                  <p>まだレビュー投稿がありません。</p>
+                <%end%>
               </div>
             </div>
           </div>
@@ -88,7 +106,7 @@
               <!-- post reviwes form -->
                 <div class="card bg-light mb-4">
                   <div class="card-header">レビュー投稿</div>
-                    <div class="card-body">
+                    <div class="card-body review">
                       <%= render "public/reviews/form.html.erb", {park: @park, review: @review } %>
                     </div>
                 </div>
@@ -101,8 +119,8 @@
   </div>
 </div>
 
-  <!-- Google maps API -->
   <script type="text/javascript">
+  //Google maps API
     function initMap() {
       geocoder = new google.maps.Geocoder()
       map = new google.maps.Map(document.getElementById('map'),{
@@ -122,7 +140,7 @@
         animation: google.maps.Animation.BOUNCE
       });
     }
-
+  //slick
     $('.images_box').slick({
           dots: true,
           infinite: true,
@@ -130,10 +148,7 @@
           fade: true,
           cssEase: 'linear'
         });
-
-
   </script>
-
   <script async defer
         src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
   </script>
