@@ -40,7 +40,7 @@ require 'csv'
 
 
 #管理者アカウントの作成
-  admin = [{email: 'admin@example.com', password:'ENV[PS_ADMIN]' }]
+  admin = [{email: 'admin@example.com', password: ENV['PS_ADMIN'] }]
   admin.each do |record|
     Admin.create!(record) unless Admin.find_by(email: record[:email])
   end
