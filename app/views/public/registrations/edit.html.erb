@@ -6,17 +6,20 @@
 <%= render "public/shared/error_messages", resource: resource %>
   <div class="row justify-content-center">
     <div class="col-sm-2">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= f.label :メールアドレス, class:"col-form-label" %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.label :email,"メールアドレス", class:"col-form-label" %>
     </div>
     <div class="col-sm-4">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
     </div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
   </div>
 
   <div class="row justify-content-center">
     <div class="col-md-2">
-      <%= f.label :パスワード ,class:"col-form-label"%>
+      <%= f.label :password,"パスワード" ,class:"col-form-label"%><i>(変更したくない場合は空白のままにしてください)</i>
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> 文字以上)</em>
         <% end %><br />
@@ -28,21 +31,24 @@
 
   <div class="row justify-content-center">
     <div class="col-sm-2">
-      <%= f.label :入力確認,class:"col-form-label" %>
+      <%= f.label :password_confirmation,"入力確認",class:"col-form-label" %>
     </div>
     <div class="col-sm-4">
       <%= f.password_field :password_confirmation, autocomplete: "new-password",class:"form-control" %>
     </div>
   </div>
-
+  <div class="field">
+    <%= f.label :current_password %> <i>(変更を確認するには現在のパスワードが必要です)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
   <div class="sex_field row justify-content-center">
     <div class="col-sm-2">
-      <%= f.label :性別, class:"form-check-label" %>
+      <%= f.label :sex,"性別", class:"form-check-label" %>
     </div>
     <div class="col-sm-4">
-      <%= f.label :男性, class:"form-check-label"  %>
+      <%= f.label :male,"男性", class:"form-check-label"  %>
         <%= f.radio_button :sex, :man,   class:"form-check-input", disabled: true %>
-      <%= f.label :女性, class:"form-check-label" %>
+      <%= f.label :female,"女性", class:"form-check-label" %>
         <%= f.radio_button :sex, :woman, class:"form-check-input", disabled: true %>
     </div>
   </div>
@@ -69,9 +75,16 @@
     </div>
     <div class="row justify-content-end">
       <div class="col-sm-4">
-        <button type="subimit" class="btn btn-success btn-sm">更新する</div>
+      <%= f.submit "更新する",class:"btn-sm btn-primary" %>
+      </div>
     </div>
-  </div>
   <% end %>
-</div>
+  </div>
 
+  <h3>Cancel my account</h3>
+
+  <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+
+<%= link_to "Back", :back %>
+
+</div>
