@@ -62,7 +62,7 @@
                   <h6 class="card-subtitle mb-2 text-muted">
                       Posted on <%= review.created_at %>
                   <b>投稿者:<%= review.member.account_name %></b>
-                      <% if @member == current_member || admin_signed_in? %>
+                      <% if review.member == @member || admin_signed_in? %>
                         <%= link_to '削除', park_review_path(review.park, review), method: :delete, data: { confirm: '削除してもよろしいでしょうか？' },class:"card-link" %>
                       <% end %></h6>
                       <%= review.review_detail %>

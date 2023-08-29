@@ -6,8 +6,6 @@ class Public::ParksController < ApplicationController
     @park = Park.find(params[:id])
     gon.park = @park
     @review = Review.new
-    #@review_comment = ReviewComment.new
-    #@reviews = @park.reviews.all
     @member = current_member
   end
 
