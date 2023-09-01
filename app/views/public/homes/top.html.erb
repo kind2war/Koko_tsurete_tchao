@@ -36,15 +36,14 @@
 		</div>
 	</div>
 
-
-
 <!--Top紹介文-->
 	<!--おすすめ公園-->
 <div class="row">
-	<div class="col-lg-3 offset-2"><h3>おすすめの公園</h3></div>
+	<div class="col-md-7 offset-md-3"><h3>おすすめの公園</h3></div>
 </div>
   <div class="container-fluid">
-    <div class="row offset-1">
+    <div class="row">
+    	<div class="col-md-7 offset-md-3">
       <div id="new-item">
     		<% @parks.each.with_index(1) do |park, i| %>
 					<% if park.images.attached? %>
@@ -61,6 +60,7 @@
 						</div>
 					<%end%>
 	    	<%end%>
+      </div>
       </div>
     </div>
   </div>
