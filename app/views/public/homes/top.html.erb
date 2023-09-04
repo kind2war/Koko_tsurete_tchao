@@ -12,15 +12,11 @@
 					<tr>
 						<% @reviews.each.with_index(1) do |review, i|%>
 						<td>#<%= i %></td>
-						<td>『<%= review.title %>』by <%= review.member.account_name %></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><%= review.review_detail %></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><%= link_to '＠'+ review.park.park_name, park_path(review.park) %>, on <%= review.created_at.strftime("%-m.%d.%Y") %></td>
+						<td>『<%= review.title %>』<br/>
+									<%= review.review_detail %><br />
+						by <%= review.member.account_name %><br/>
+						<%= link_to '＠'+ review.park.park_name, park_path(review.park) %>, on <%= review.created_at.strftime("%-m.%d.%Y") %>
+						</td>
 					</tr>
 					<%end%>
 				</tbody>
