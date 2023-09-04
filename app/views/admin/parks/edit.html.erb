@@ -1,41 +1,13 @@
 <div class="container">
-  <div class="form-group d-flex flex-row">
-    <div class="col-md-3">
-      <%= form_with model: @park ,url: admin_park_path do |f| %>
-        <%= f.label :park_name, '◆登録　＊名称 '%>
-        <%= f.text_field :park_name, class:"form-control" %>
-    </div>
-      <div class="col-md-3">
-        <%= f.label :address,'＊所在地' %>
-        <%= f.text_field :address, class:"form-control" %>
+  <h3>編集する</h3>
+  <div class ="row">
+    <%= render 'admin/parks/form',parks: @parks %>
+    <div class="row justify-content-end">
+      <div class="col-md-1">
+      <%= button_to "この公園情報を削除する", admin_park_path(@park.id),  class:"btn-danger btn-sm", method: :delete, data: {confirm: "削除しますか？"} %>
       </div>
-        <div class="col-md-3">
-          <%= f.label :park_type,'＊分類' %>
-          <%= f.text_field :park_type, class:"form-control" %>
-        </div>
-  </div>
-  <div class="form-group d-flex flex-row">
-    <div class="col-md-1">
-      <div class="p-2"><%= f.label :feature_ids, '＊タグ' %></div>
-    </div>
-    <div class="form-check form-check-inline border d-flex flex-row flex-warp">
-      <%= f.collection_check_boxes(:feature_ids, Feature.all, :id, :feature_detail) do |tag| %>
-        <%= tag.label class: 'form-check-label' do %>
-          <div class="mx-4 mt-2">
-          <%= tag.check_box class: 'form-check-input' %>
-          <%= tag.label %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-      <div class="images_form">
-        <%= f.file_field :images, direct_upload: true, multiple: true %>
-      </div>
-    <div class="col-md-2">
-      <%= f.submit class:"btn-primary btn-sm", data: {"turbolinks"=>false}%>
-      <% end %>
-      <%= button_to "削除", admin_park_path(@park.id),  class:"btn-danger btn-sm", method: :delete, data: {confirm: "削除しますか？"} %>
     </div>
   </div>
 </div>
+
 

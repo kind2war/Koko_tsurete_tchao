@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_16_012143) do
+ActiveRecord::Schema.define(version: 2023_08_28_164505) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -96,10 +96,6 @@ ActiveRecord::Schema.define(version: 2023_08_16_012143) do
     t.string "account_name", default: "", null: false
     t.date "birth_date", default: "1991-01-01", null: false
     t.integer "sex", default: 0, null: false
-    t.integer "spouse", default: 0, null: false
-    t.integer "children", default: 0, null: false
-    t.integer "prefecture_id"
-    t.integer "city_id"
     t.boolean "is_deleted", default: false, null: false
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
@@ -123,12 +119,48 @@ ActiveRecord::Schema.define(version: 2023_08_16_012143) do
     t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "area"
+    t.string "size_rank"
+    t.integer "size"
+    t.string "star"
   end
 
   create_table "prefectures", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rating_rates", force: :cascade do |t|
+    t.decimal "value", precision: 11, scale: 2, default: "0.0"
+    t.string "author_type", limit: 10, null: false
+    t.integer "author_id", null: false
+    t.string "resource_type", limit: 10, null: false
+    t.integer "resource_id", null: false
+    t.string "scopeable_type", limit: 10
+    t.integer "scopeable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id", "resource_type", "resource_id", "scopeable_type", "scopeable_id"], name: "index_rating_rates_on_author_and_resource_and_scopeable", unique: true
+    t.index ["author_type", "author_id"], name: "index_rating_rates_on_author_type_and_author_id"
+    t.index ["resource_type", "resource_id"], name: "index_rating_rates_on_resource_type_and_resource_id"
+    t.index ["scopeable_type", "scopeable_id"], name: "index_rating_rates_on_scopeable_type_and_scopeable_id"
+  end
+
+  create_table "rating_ratings", force: :cascade do |t|
+    t.decimal "average", precision: 11, scale: 2, default: "0.0"
+    t.decimal "estimate", precision: 11, scale: 2, default: "0.0"
+    t.integer "sum", default: 0
+    t.integer "total", default: 0
+    t.string "resource_type", limit: 10, null: false
+    t.integer "resource_id", null: false
+    t.string "scopeable_type", limit: 10
+    t.integer "scopeable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_type", "resource_id", "scopeable_type", "scopeable_id"], name: "index_rating_rating_on_resource_and_scopeable", unique: true
+    t.index ["resource_type", "resource_id"], name: "index_rating_ratings_on_resource_type_and_resource_id"
+    t.index ["scopeable_type", "scopeable_id"], name: "index_rating_ratings_on_scopeable_type_and_scopeable_id"
   end
 
   create_table "review_comments", force: :cascade do |t|

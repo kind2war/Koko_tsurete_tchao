@@ -1,16 +1,16 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-2">
-			<table border="1" class="table">
+		<div class="col-md-3">
+			<table class="table">
 				<thead>
 					<tr>
-						<th colspan ="2" class="table-secondary" >新着レビュー</th>
+						<th colspan ="2" class="table border-primary" >新着レビュー</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<% @reviews.each.with_index(1) do |review, i|%>
-						<td><%= i %></td>
+						<td>#<%= i %></td>
 						<td>『<%= review.title %>』by <%= review.member.account_name %></td>
 					</tr>
 					<tr>
@@ -19,13 +19,24 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><%= review.park.park_name %></td>
+						<td>@<%= review.park.park_name %></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><%= review.park.created_at.strftime("%Y-%m-%d %H:%M") %></td>
 					</tr>
 					<%end%>
 				</tbody>
 			</table>
 		</div>
+		<div class="col-md-7">
+			<div class="images_box">
+				<%= image_tag 'top.jpg'%>
+			</div>
+		</div>
 	</div>
+
+
 
 <!--Top紹介文-->
 	<!--おすすめ公園-->
@@ -38,9 +49,9 @@
     		<% @parks.each.with_index(1) do |park, i| %>
 					<% if park.images.attached? %>
 						<div class="col-md-2 offset-1">
-							<%= link_to image_tag park, size:'160x120'%>
+							<%= link_to image_tag(park.images.first, size:'160x120'), park %>
 							<%= i %>
-							<% link_to park.park_name, park %>
+							<%= link_to park.park_name, park %>
 						</div>
 					<%else%>
 						<div class="col-md-2 offset-1">

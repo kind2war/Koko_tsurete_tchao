@@ -15,4 +15,17 @@ class Member < ApplicationRecord
   validates :password,     presence: true
 
   enum sex: { man: 0, woman: 1}
+
+GUEST_USER_EMAIL = "guest@example.com"
+
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.account_name = "guestuser"
+    end
+  end
+
+  def guest_member?
+    email == GUEST_USER_EMAIL
+  end
 end

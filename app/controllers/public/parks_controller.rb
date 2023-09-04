@@ -4,14 +4,18 @@ class Public::ParksController < ApplicationController
 
   def show
     @park = Park.find(params[:id])
+    gon.park = @park
     @review = Review.new
-    #@review_comment = ReviewComment.new
-    #@reviews = @park.reviews.all
     @member = current_member
   end
 
   def index
-    @parks = @q.result
+    @parks = @q.result(distinct: true)
+  end
+
+  def update
+    @park = Park.find(params[:id]).update(park_params)
+    redirect_to park_path(params[:id])
   end
 
   def search
@@ -35,6 +39,9 @@ private
     @q = Park.ransack(params[:q])
   end
 
+  def park_params
+    params.require(:park).permit(:park_name, :address,:park_type, :latitude, :longitude, :size_rank,  feature_ids: [], images:[])
+  end
 
 
 end

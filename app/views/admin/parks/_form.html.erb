@@ -1,43 +1,62 @@
-<div class="container">
-  <div class="card bg-light">
-    <h3>新規登録</h3>
-  <div class="form-group d-flex flex-row">
-    <div class="col-md-3">
-      <%= form_with model: @park, url: admin_parks_path, local: true do |f| %>
-        <%= f.label :park_name, '＊名称（必須）'%>
-        <%= f.text_field :park_name, class:"form-control" %>
+<div class="card bg-light">
+<!-- line 1 -->
+<div class="row">
+  <%= form_with model: @park, local: true do |f| %>
+  <div class="form-group">
+    <div class="col-10 col-sm-4">
+      <%= f.label :park_name, '＊名称（必須）'%>
+      <%= f.text_field :park_name, class:"form-control" %>
     </div>
-      <div class="col-md-3">
-        <%= f.label :address,'＊所在地（必須）' %>
-        <%= f.text_field :address, class:"form-control" %>
-      </div>
-        <div class="col-md-3">
-          <%= f.label :park_type,'＊分類' %>
-          <%= f.text_field :park_type, class:"form-control" %>
-        </div>
-  </div>
-
-  <div class="form-group d-flex flex-row">
-    <div class="col-md-1">
-      <div class="p-2"><%= f.label :feature_id, '＊タグ' %></div>
+    <div class="col-10 col-sm-4">
+      <%= f.label :address,'＊所在地（必須）' %>
+      <%= f.text_field :address, class:"form-control" %>
     </div>
-      <div class="form-check form-check-inline border d-flex flex-row flex-warp">
-        <%= f.collection_check_boxes(:feature_ids, Feature.all, :id, :feature_detail) do |tag| %>
-          <%= tag.label class: 'form-check-label' do %>
-            <div class="mx-4 mt-2">
-            <%= tag.check_box class: 'form-check-input' %>
-            <%= tag.label %>
-            </div>
-          <% end %>
-        <% end %>
-        <%= link_to '編集', admin_features_path %>
-      </div>
-        <div class="images_form">
-          <%= f.file_field :images, direct_upload: true, multiple: true  %>
-        </div>
-          <%= f.submit class:"btn btn-primary btn-sm"%>
-      <% end %>
-  </div>
+    <div class="col-10 col-sm-4">
+      <%= f.label :park_type,'＊分類' %>
+      <%= f.select :park_type, options_for_select(Park.park_type_options),{},{ class:"form-select form-select-lg mb-3"}%>
+    </div>
   </div>
 </div>
+  <!-- line 2 -->
+    <div class="row">
+      <div class="form-group">
+        <div class="col-10 col-sm-4">
+          <%= f.label :latitude,'＊緯度（必須）' %>
+          <%= f.text_field :latitude, class:"form-control" %>
+        </div>
+        <div class="col-10 col-sm-4">
+          <%= f.label :longitude,'＊経度（必須）' %>
+          <%= f.text_field :longitude, class:"form-control" %>
+        </div>
+        <div class="col-10 col-sm-4">
+          <%= f.label :area,'＊分類' %>
+          <%= f.select :area, options_for_select(Park.area_options),{},{ class:"form-select form-select-lg mb-3"}%>
+        </div>
+      </div>
+    </div>
+      <!-- line 3 -->
+        <div class="form-group">
+          <div class="col-md-2 col-sm-2 mt-2">
+            <%= f.label :feature_detail, '＊タグ' %>
+          </div>
+            <div class="form-check form-check-inline border d-flex flex-row flex-wrap ">
+              <%= f.collection_check_boxes(:feature_ids, Feature.all, :id, :feature_detail) do |tag| %>
+                <div class="mx-4 mt-2">
+                  <%= tag.label class: 'form-check-label' do %>
+                    <%= tag.check_box class: 'form-check-input' %>
+                    <%= tag.label %>
+                  <% end %>
+                </div>
+                <% end %>
+                <%= link_to '編集', admin_features_path %>
+            </div>
+          <div class="images_form col-sm-6 col-md-5 mt-2">
+            <%= f.file_field :images, direct_upload: true, multiple: true  %>
+          </div class="col-sm-3 col-md-3 mx-4 mt-2">
+          <%= f.submit class:"btn-primary btn-sm mt-2"%>
+        </div>
+      <% end %>
+    </div>
+
+
 
