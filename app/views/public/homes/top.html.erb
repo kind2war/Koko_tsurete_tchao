@@ -1,5 +1,6 @@
 <div class="container">
 	<div class="row">
+		<!-- 新着レビュー一覧-->
 		<div class="col-md-3">
 			<table class="table">
 				<thead>
@@ -19,49 +20,45 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td>@<%= review.park.park_name %></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><%= review.park.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+						<td>@<%= link_to review.park.park_name, park_path(review.park) %>, on <%= review.created_at.strftime("%-m.%d.%Y") %></td>
 					</tr>
 					<%end%>
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-7">
-			<div class="images_box">
-				<%= image_tag 'top.jpg'%>
-			</div>
-		</div>
-	</div>
+			<!--Top紹介文-->
+			<div class="col-md-9">
+				<div class="images_box">
+					<%= image_tag 'top.jpg'%>
+				</div>
 
-<!--Top紹介文-->
 	<!--おすすめ公園-->
-<div class="row">
-	<div class="col-md-7 offset-md-3"><h3>おすすめの公園</h3></div>
-</div>
-  <div class="container-fluid">
-    <div class="row">
-    	<div class="col-md-7 offset-md-3">
-      <div id="new-item">
-    		<% @parks.each.with_index(1) do |park, i| %>
-					<% if park.images.attached? %>
-						<div class="col-md-2 offset-1">
-							<%= link_to image_tag(park.images.first, size:'160x120'), park %>
-							<%= i %>
-							<%= link_to park.park_name, park %>
-						</div>
-					<%else%>
-						<div class="col-md-2 offset-1">
-							<%= image_tag 'https://placehold.jp/640x480.png', size: '160x120' %>
-							<%= i %>
-							<%= link_to park.park_name, park %>
-						</div>
-					<%end%>
-	    	<%end%>
-      </div>
-      </div>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-md-12 mt-5"><h3>おすすめの公園</h3></div>
+	</div>
+	  <div class="container-fluid">
+	    <div class="row">
+	    	<div class="col-md-12">
+		      <div id="new-item">
+		    		<% @parks.each.with_index(1) do |park, i| %>
+							<% if park.images.attached? %>
+								<div class="col-md-3">
+									<%= link_to image_tag(park.images.first, size:'160x120'), park %><br/>
+									<%= i %>
+									<%= link_to park.park_name, park %>
+								</div>
+							<%else%>
+								<div class="col-md-3">
+									<%= image_tag 'https://placehold.jp/640x480.png', size: '160x120' %><br/>
+									<%= i %>
+									<%= link_to park.park_name, park %>
+								</div>
+							<%end%>
+			    	<%end%>
+		      </div>
+	      </div>
+	    </div>
+	  </div>
+	  </div>
+	 </div>
 </div>
