@@ -20,7 +20,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td>@<%= link_to review.park.park_name, park_path(review.park) %>, on <%= review.created_at.strftime("%-m.%d.%Y") %></td>
+						<td><%= link_to '＠'+ review.park.park_name, park_path(review.park) %>, on <%= review.created_at.strftime("%-m.%d.%Y") %></td>
 					</tr>
 					<%end%>
 				</tbody>
