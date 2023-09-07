@@ -28,6 +28,11 @@
     <header>
       <%= render 'layouts/navbar' %>
     </header>
+      <div class="">
+        <% flash.each do |message_type, message| %>
+        <%= content_tag :div, message, class: "flash flash__#{message_type}" %>
+        <% end %>
+      </div>
       <%= yield %>
 
     <!-- Footer-->
