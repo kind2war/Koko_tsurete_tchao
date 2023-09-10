@@ -21,8 +21,13 @@ before_action :authenticate_member!
   end
 
   def destroy
-    Review.find(params[:id]).destroy
-    redirect_to park_path(params[:park_id]), notice: "レビューを削除しました"
+    review = Review.find(params[:id])
+    if review.member == current_member
+      review.destroy
+      redirect_to park_path(params[:park_id]), notice: "レビューを削除しました。"
+    else
+      redirect_to park_path(params[:park_id]), alert: "レビューは削除できません。"
+    end
   end
 
  private
