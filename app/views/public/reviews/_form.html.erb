@@ -1,38 +1,13 @@
 <% if member_signed_in? %>
   <%= form_with( model:[park, review],method: :post ) do |f| %>
-
-   <% if review.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
-
-        <ul>
-          <% review.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-
-      </div>
-    <% end %>
-
     <div class="form-group">
       <%= f.label :title, "タイトル" %>
       <%= f.text_field :title,  class: 'form-control title' %>
-
-     <% if review.errors.include?(:title) %>
-       <p style="color: red;"><%= review.errors.full_messages_for(:title).first %>
-     <% end %>
-
     </div>
     <div class ="form-group">
       <%= f.label :review_detail, "本文"%>
       <%= f.text_area :review_detail, rows: '5', placeholder: "レビューをここに",  class: 'form-control review_detail' %>
-
-     <% if review.errors.include?(:review_detail) %>
-       <p style="color: red;"><%= review.errors.full_messages_for(:review_detail).first %>
-     <% end %>
-
     </div>
-
     <%= f.submit class:"btn btn-primary" %>
   <%end%>
 <%else%>
