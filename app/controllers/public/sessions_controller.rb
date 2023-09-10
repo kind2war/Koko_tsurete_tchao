@@ -6,7 +6,7 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     member = Member.guest
     sign_in member
-    redirect_to mypage_path, notice: "guestuserでログインしました。"
+    redirect_to mypage_path, notice: "ゲストユーザーとしてログインしました。"
   end
 
   # GET /resource/sign_in

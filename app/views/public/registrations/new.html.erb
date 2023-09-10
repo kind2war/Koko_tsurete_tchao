@@ -1,18 +1,16 @@
 <div class="container px-4">
-  <% flash.each do |message_type, message| %>
-    <%= content_tag :div, message, class: "alert alert-danger" %>
-      <% end %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
         <div class="row justify-content-start">
           <div class="col-sm-3 offset-1 g-3 my-4">
+            
             <span style="background-color:#DCDCDC">ユーザー新規登録</span>
           </div>
         </div>
 
         <div class="row justify-content-center">
           <div class="col-sm-2">
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-              <%= render "public/shared/error_messages", resource: resource %>
-                <%= f.label :メールアドレス, class:"col-form-label" %>
+            <%= f.label :メールアドレス, class:"col-form-label" %>
           </div>
           <div class="col-sm-4">
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
