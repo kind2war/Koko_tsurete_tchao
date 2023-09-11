@@ -32,7 +32,7 @@ require 'csv'
     {id: 2, feature_detail: '多機能トイレ'},
     {id: 3, feature_detail: '水飲み場・手洗い場'},
     {id: 4, feature_detail: '駐車場'},
-    ]
+  ]
 
   features.each do |feature|
   Feature.find_or_create_by(feature)

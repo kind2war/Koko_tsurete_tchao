@@ -38,7 +38,7 @@ class Park < ApplicationRecord
     '特殊公園（風致公園、動植物公園、歴史公園、墓園）',
     '地区公園（カントリーパーク）',
     'その他'
-    ]
+  ]
   def self.park_type_options
     PARK_TYPE.select {|type|[type,type]}
   end
@@ -54,7 +54,7 @@ class Park < ApplicationRecord
     '西エリア',
     '久里浜エリア',
     '北下浦エリア'
-    ]
+  ]
   def self.area_options
     AREA.map{|type|[type,type]}
   end
