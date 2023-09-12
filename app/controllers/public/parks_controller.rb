@@ -40,7 +40,7 @@ private
   end
 
   def park_params
-    params.require(:park).permit(:park_name, :address,:park_type, :latitude, :longitude, :size_rank,  feature_ids: [], images:[])
+    params.require(:park).permit(:park_name, :address,:park_type, :latitude, :longitude, :size_rank, :star, feature_ids: [], images:[])
   end
 
 
